@@ -4,3 +4,7 @@ jax==0.2.6
 flax==0.3.0
 xarray
 seaborn
+
+# v2 PyTorch port (used by notebook_setup.py + Phase 3 integrator notebook).
+# torch / matplotlib / pandas are auto-installed by notebook_setup.ensure_packages.
+torchdiffeq

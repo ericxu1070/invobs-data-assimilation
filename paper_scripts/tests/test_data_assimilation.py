@@ -13,15 +13,28 @@
 # limitations under the License.
 # ==============================================================================
 """
-Unit tests for methods in data_assimilation.py using pytest.
+Unit tests for methods in run_data_assimilation.py using pytest.
+
+This test depends on the pinned legacy JAX stack (jax==0.2.6, flax==0.3.0,
+jax_cfd==0.1.0) and is skipped automatically when those modules are absent --
+see CLAUDE.md for the reason the stack is not installed by default.
+
+Note: the original file imported ``from data_assimilation import ...`` but the
+module on disk is ``run_data_assimilation.py``; that mismatch was flagged in
+INSTRUCTIONS_FROM_REVIEW.md (Phase-cross-cutting task). The import below uses
+the actual module name. Fix is import-only -- module was NOT renamed.
 """
 import pytest
 import json
 import numpy as np
-import jax
-import jax.numpy as jnp
 
-from data_assimilation import generate_correlation_transform
+# Skip this whole file unless the legacy JAX stack is importable.
+jax = pytest.importorskip('jax', reason='requires legacy jax==0.2.6')
+jnp = pytest.importorskip('jax.numpy', reason='requires legacy jax.numpy==0.2.6')
+pytest.importorskip('flax', reason='requires legacy flax==0.3.0')
+pytest.importorskip('jax_cfd', reason='requires legacy jax_cfd==0.1.0')
+
+from run_data_assimilation import generate_correlation_transform  # noqa: E402
 
 SEED = 7
 ATOL = 1e-3
