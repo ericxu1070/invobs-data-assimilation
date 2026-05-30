@@ -50,8 +50,8 @@ cases---fall within ensemble scatter and should be read as tendencies rather
 than decisive separations.
 
 \emph{Compute-limited Kolmogorov runs.} The Kolmogorov solver relies on
-\texttt{torch.fft.rfft2}, which ran on the CPU only (no graphics processing
-unit, GPU), so all 2D experiments were validation-scale: a tiny ensemble, a
+\texttt{torch.fft.rfft2}, which ran on CPU only in our stack, so all 2D
+experiments were validation-scale: a tiny ensemble, a
 lightweight inverter trained on only a few hundred trajectories for a few tens
 of epochs rather than the paper-scale $32{,}000$ trajectories and $500$
 epochs, and a single observation-noise level. These runs demonstrate the
@@ -92,11 +92,11 @@ below $0.2$ RMSE, and exactly zero where the best $\sigb$ was already $1.0$).
 
 \emph{No real data and simplified covariances.} All experiments are on
 synthetic, perfect-model trajectories with no model error, and our covariances
-are deliberately simple: a single static spatial-correlation matrix $\bm C$
-(condition number $8.72$) for the Lorenz-96 background $\Bcov = \sigb^2 \bm C$,
-a diagonal observation-error covariance $\Rcov = \sigobs^2 \bm I$ with
+are deliberately simple: a single static spatial-correlation matrix $\bm{C}$
+(condition number $8.72$) for the Lorenz-96 background $\Bcov = \sigb^2 \bm{C}$,
+a diagonal observation-error covariance $\Rcov = \sigobs^2 \bm{I}$ with
 independent noise, and for Kolmogorov flow an identity background
-$\Bcov = \sigb^2 \bm I$ because forming and factorizing a full
+$\Bcov = \sigb^2 \bm{I}$ because forming and factorizing a full
 $4096 \times 4096$ spatial covariance was prohibitively expensive. None of
 these capture the flow-dependent, correlated error structures of an
 operational system.
@@ -112,9 +112,9 @@ inverter, and a sweep over multiple noise levels, so that the cycling
 extension can be evaluated where it has a chance to separate from a single
 window. On the statistical side, both covariances invite enrichment: a
 \emph{correlated} observation-error covariance $\Rcov$ in place of the diagonal
-$\sigobs^2 \bm I$, and a flow-dependent background covariance estimated from an
+$\sigobs^2 \bm{I}$, and a flow-dependent background covariance estimated from an
 ensemble (an ensemble or hybrid ensemble-variational scheme) in place of the
-static $\bm C$, which is also the natural route to a tractable background
+static $\bm{C}$, which is also the natural route to a tractable background
 covariance for the 2D flow without forming the full dense matrix. Finally, an
 adaptive integrator (dopri5) would produce paper-matched trajectories with the
 expected Lyapunov time, removing the fixed-step artifact and enabling a cleaner

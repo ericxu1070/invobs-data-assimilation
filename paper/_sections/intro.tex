@@ -33,7 +33,7 @@ $\xstate_0$ whose model trajectory $\Mop^t(\xstate_0)$ fits a sequence of observ
 The observation operator $\Hop$ in their setting (and ours) is a sparse spatial
 subsampling: it keeps every fourth grid point for Lorenz-96 (10 of 40 points observed)
 and every sixteenth point in each direction for two-dimensional (2D) Kolmogorov flow (a
-$4\times4=16$ of 4096 points observed). Because $\Hop$ is many-to-one and highly lossy,
+$4\times4=16$-point subset of 4096 grid points). Because $\Hop$ is many-to-one and highly lossy,
 the standard observation-space objective
 $\lVert \Hop\,\Mop^t(\xstate_0) - \yobs_t\rVert^2$ is strongly non-convex and riddled
 with bad local minima, so a poorly initialized gradient-based optimizer gets trapped.
