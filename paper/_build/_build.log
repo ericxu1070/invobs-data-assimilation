@@ -1,0 +1,589 @@
+Initial Win CP for (console input, console output, system): (CP437, CP437, CP1252)
+I changed them all to CP1252
+Rc files read:
+  NONE
+Latexmk: This is Latexmk, John Collins, 15 June 2025. Version 4.87.
+No existing .aux file, so I'll make a simple one, and require run of *latex.
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Category 'other':
+  Rerun of 'pdflatex' forced or previously required:
+    Reason or flag: 'Initial setup'
+
+------------
+Run number 1 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -recorder  "main.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-09-02>
+(c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size11.clo)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/bm.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def) (./main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd) (./_sections/intro.tex
+
+Package natbib Warning: Citation `kalnay2003atmospheric' on page 1 undefined on input line 10.
+
+
+Package natbib Warning: Citation `ledimet1986variational' on page 1 undefined on input line 12.
+
+
+Package natbib Warning: Citation `courtier1994strategy' on page 1 undefined on input line 12.
+
+
+Package natbib Warning: Citation `lorenz1996predictability' on page 1 undefined on input line 20.
+
+
+[1{c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+Package natbib Warning: Citation `frerix2021invobs' on page 2 undefined on input line 31.
+
+
+Package natbib Warning: Citation `paszke2019pytorch' on page 2 undefined on input line 79.
+
+
+Package natbib Warning: Citation `liu1989limited' on page 2 undefined on input line 82.
+
+
+[2]
+
+Package natbib Warning: Citation `frerix2021invobs' on page 3 undefined on input line 95.
+
+) (./_sections/background.tex
+
+Package natbib Warning: Citation `kalnay2003atmospheric' on page 3 undefined on input line 6.
+
+
+Package natbib Warning: Citation `ledimet1986variational' on page 3 undefined on input line 6.
+
+
+Package natbib Warning: Citation `courtier1994strategy' on page 3 undefined on input line 6.
+
+
+Package natbib Warning: Citation `lorenz1996predictability' on page 3 undefined on input line 6.
+
+
+Package natbib Warning: Citation `frerix2021invobs' on page 3 undefined on input line 8.
+
+
+Package natbib Warning: Citation `frerix2021invobs' on page 3 undefined on input line 10.
+
+
+Package natbib Warning: Citation `kochkov2021machine' on page 3 undefined on input line 14.
+
+
+[3]
+
+Package natbib Warning: Citation `paszke2019pytorch' on page 4 undefined on input line 34.
+
+) (./_sections/methods.tex
+[4]
+
+Package natbib Warning: Citation `lorenz1996predictability' on page 5 undefined on input line 16.
+
+
+LaTeX Warning: Reference `eq:l96' on page 5 undefined on input line 24.
+
+
+Package natbib Warning: Citation `dormand1980family' on page 5 undefined on input line 32.
+
+
+Package natbib Warning: Citation `kochkov2021machine' on page 5 undefined on input line 50.
+
+
+[5]
+
+LaTeX Warning: Reference `fig:noisedist' on page 6 undefined on input line 79.
+
+
+Package natbib Warning: Citation `ledimet1986variational' on page 6 undefined on input line 106.
+
+
+Package natbib Warning: Citation `courtier1994strategy' on page 6 undefined on input line 106.
+
+
+[6 <./figures/noise_distributions.png>]
+
+Package natbib Warning: Citation `paszke2019pytorch' on page 7 undefined on input line 145.
+
+
+Package natbib Warning: Citation `frerix2021invobs' on page 7 undefined on input line 149.
+
+
+Package natbib Warning: Citation `elfwing2018sigmoid' on page 7 undefined on input line 150.
+
+
+Package natbib Warning: Citation `ioffe2015batch' on page 7 undefined on input line 151.
+
+
+LaTeX Warning: Reference `eq:physcost' on page 7 undefined on input line 173.
+
+
+LaTeX Warning: Reference `eq:4dvar' on page 7 undefined on input line 174.
+
+
+Package natbib Warning: Citation `liu1989limited' on page 7 undefined on input line 182.
+
+
+[7]) (./_sections/results_l96.tex
+
+Package natbib Warning: Citation `paszke2019pytorch' on page 8 undefined on input line 12.
+
+
+Package natbib Warning: Citation `dormand1980family' on page 8 undefined on input line 15.
+
+
+LaTeX Warning: Reference `fig:l96-integrator' on page 8 undefined on input line 20.
+
+
+LaTeX Warning: Reference `fig:l96-lyapunov' on page 8 undefined on input line 28.
+
+
+[8]
+
+LaTeX Warning: Reference `fig:l96-integrator' on page 9 undefined on input line 70.
+
+
+LaTeX Warning: Reference `fig:l96-integrator' on page 9 undefined on input line 70.
+
+
+Package natbib Warning: Citation `elfwing2018sigmoid' on page 9 undefined on input line 83.
+
+
+Package natbib Warning: Citation `ioffe2015batch' on page 9 undefined on input line 85.
+
+
+LaTeX Warning: Reference `fig:l96-invtrain' on page 9 undefined on input line 86.
+
+
+LaTeX Warning: Reference `fig:l96-baselinebar' on page 9 undefined on input line 125.
+
+
+LaTeX Warning: Reference `fig:l96-hovmoller' on page 9 undefined on input line 130.
+
+
+[9 <./figures/L96_Integrator__cell08__out00.png>]
+
+LaTeX Warning: Reference `tab:l96-tuned' on page 10 undefined on input line 177.
+
+
+LaTeX Warning: Reference `fig:l96-keyresult' on page 10 undefined on input line 179.
+
+
+[10 <./figures/L96_Integrator__cell10__out00.png>]
+
+Package natbib Warning: Citation `liu1989limited' on page 11 undefined on input line 248.
+
+
+[11 <./figures/L96_PaperFaithful__cell10__out00.png>]
+
+LaTeX Warning: Reference `fig:l96-swA' on page 12 undefined on input line 257.
+
+
+LaTeX Warning: Reference `fig:l96-swB1' on page 12 undefined on input line 297.
+
+
+[12 <./figures/L96_PaperFaithful__cell19__out00.png>]
+
+LaTeX Warning: Reference `fig:l96-swB2' on page 13 undefined on input line 327.
+
+
+[13 <./figures/L96_PaperFaithful__cell20__out00.png>]
+
+LaTeX Warning: Reference `fig:l96-swC' on page 14 undefined on input line 361.
+
+
+LaTeX Warning: Reference `fig:l96-swE' on page 14 undefined on input line 403.
+
+
+[14 <./figures/L96_PaperFaithful__cell28__out00.png>]) (./_sections/results_kflow.tex
+[15 <./figures/L96_SlidingWindow__cell27__out00.png>]
+
+LaTeX Warning: Reference `fig:kflow-traj' on page 16 undefined on input line 9.
+
+
+LaTeX Warning: Reference `fig:kflow-warmup' on page 16 undefined on input line 9.
+
+
+LaTeX Warning: Reference `fig:kflow-expA' on page 16 undefined on input line 26.
+
+
+LaTeX Warning: Reference `fig:kflow-expB' on page 16 undefined on input line 36.
+
+
+[16]
+
+LaTeX Warning: Reference `fig:kflow-expC' on page 17 undefined on input line 46.
+
+
+LaTeX Warning: Reference `sec:results-l96' on page 17 undefined on input line 46.
+
+
+LaTeX Warning: Reference `fig:kflow-snap' on page 17 undefined on input line 56.
+
+
+LaTeX Warning: Float too large for page by 148.48389pt on input line 63.
+
+) (./_sections/discussion.tex
+
+Package natbib Warning: Citation `frerix2021invobs' on page 17 undefined on input line 6.
+
+
+[17]
+[18]
+
+Package natbib Warning: Citation `frerix2021invobs' on page 19 undefined on input line 121.
+
+)
+No file main.bbl.
+
+Package natbib Warning: There were undefined citations.
+
+
+[19]
+[20 <./figures/L96_SlidingWindow__cell30__out00.png>]
+[21 <./figures/L96_SlidingWindow__cell31__out00.png>]
+[22 <./figures/L96_SlidingWindow__cell34__out00.png>]
+[23 <./figures/L96_SlidingWindow__cell36__out00.png>]
+[24 <./figures/KFlow_Full4DVar__cell06__out00.png> <./figures/KFlow_SlidingWindow__cell19__out00.png>]
+[25 <./figures/KFlow_SlidingWindow__cell24__out00.png>]
+[26 <./figures/KFlow_SlidingWindow__cell27__out00.png>]
+[27 <./figures/KFlow_SlidingWindow__cell31__out00.png>]
+[28 <./figures/KFlow_SlidingWindow__cell33__out00.png>] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )<c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (28 pages, 1906970 bytes).
+Transcript written on main.log.
+Latexmk: Getting log file 'main.log'
+Latexmk: Examining 'main.fls'
+Latexmk: Examining 'main.log'
+Latexmk: Missing bbl file 'main.bbl' in following:
+ No file main.bbl.
+Latexmk: References changed.
+Latexmk: References changed.
+Latexmk: Log file says output to 'main.pdf'
+Latexmk: Using bibtex to make bibliography file(s).
+  ===Source file 'main.bbl' for 'pdflatex'
+Create bibtex main
+Latexmk: Found bibliography file(s):
+  ./references.bib
+Latexmk: applying rule 'bibtex main'...
+Rule 'bibtex main':  Reasons for rerun
+Category 'other':
+  Rerun of 'bibtex main' forced or previously required:
+    Reason or flag: 'Initial set up of rule'
+
+------------
+Run number 1 of rule 'bibtex main'
+------------
+------------
+Running 'bibtex  "main.aux"'
+------------
+This is BibTeX, Version 0.99d (TeX Live 2025)
+The top-level auxiliary file: main.aux
+The style file: unsrtnat.bst
+Database file #1: references.bib
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Changed files or newly in use/created:
+  main.aux
+  main.bbl
+  main.out
+
+------------
+Run number 2 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -recorder  "main.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-09-02>
+(c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size11.clo)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/bm.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def) (./main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)) (./main.out) (./main.out) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd) (./_sections/intro.tex
+
+Package natbib Warning: Citation `kalnay2003atmospheric' on page 1 undefined on input line 10.
+
+
+Package natbib Warning: Citation `ledimet1986variational' on page 1 undefined on input line 12.
+
+
+Package natbib Warning: Citation `courtier1994strategy' on page 1 undefined on input line 12.
+
+
+Package natbib Warning: Citation `lorenz1996predictability' on page 1 undefined on input line 20.
+
+
+[1{c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+Package natbib Warning: Citation `frerix2021invobs' on page 2 undefined on input line 31.
+
+
+Package natbib Warning: Citation `paszke2019pytorch' on page 2 undefined on input line 79.
+
+
+Package natbib Warning: Citation `liu1989limited' on page 2 undefined on input line 82.
+
+
+[2]
+
+Package natbib Warning: Citation `frerix2021invobs' on page 3 undefined on input line 95.
+
+) (./_sections/background.tex
+
+Package natbib Warning: Citation `kalnay2003atmospheric' on page 3 undefined on input line 6.
+
+
+Package natbib Warning: Citation `ledimet1986variational' on page 3 undefined on input line 6.
+
+
+Package natbib Warning: Citation `courtier1994strategy' on page 3 undefined on input line 6.
+
+
+Package natbib Warning: Citation `lorenz1996predictability' on page 3 undefined on input line 6.
+
+
+Package natbib Warning: Citation `frerix2021invobs' on page 3 undefined on input line 8.
+
+
+Package natbib Warning: Citation `frerix2021invobs' on page 3 undefined on input line 10.
+
+
+Package natbib Warning: Citation `kochkov2021machine' on page 3 undefined on input line 14.
+
+
+[3]
+
+Package natbib Warning: Citation `paszke2019pytorch' on page 4 undefined on input line 34.
+
+) (./_sections/methods.tex
+[4]
+
+Package natbib Warning: Citation `lorenz1996predictability' on page 5 undefined on input line 16.
+
+
+Package natbib Warning: Citation `dormand1980family' on page 5 undefined on input line 32.
+
+
+Package natbib Warning: Citation `kochkov2021machine' on page 5 undefined on input line 50.
+
+
+[5]
+
+Package natbib Warning: Citation `ledimet1986variational' on page 6 undefined on input line 106.
+
+
+Package natbib Warning: Citation `courtier1994strategy' on page 6 undefined on input line 106.
+
+
+[6 <./figures/noise_distributions.png>]
+
+Package natbib Warning: Citation `paszke2019pytorch' on page 7 undefined on input line 145.
+
+
+Package natbib Warning: Citation `frerix2021invobs' on page 7 undefined on input line 149.
+
+
+Package natbib Warning: Citation `elfwing2018sigmoid' on page 7 undefined on input line 150.
+
+
+Package natbib Warning: Citation `ioffe2015batch' on page 7 undefined on input line 151.
+
+
+Package natbib Warning: Citation `liu1989limited' on page 7 undefined on input line 182.
+
+
+[7]) (./_sections/results_l96.tex
+
+Package natbib Warning: Citation `paszke2019pytorch' on page 8 undefined on input line 12.
+
+
+Package natbib Warning: Citation `dormand1980family' on page 8 undefined on input line 15.
+
+
+[8]
+
+Package natbib Warning: Citation `elfwing2018sigmoid' on page 9 undefined on input line 83.
+
+
+Package natbib Warning: Citation `ioffe2015batch' on page 9 undefined on input line 85.
+
+
+[9 <./figures/L96_Integrator__cell08__out00.png>]
+[10 <./figures/L96_Integrator__cell10__out00.png>]
+
+Package natbib Warning: Citation `liu1989limited' on page 11 undefined on input line 248.
+
+
+[11 <./figures/L96_PaperFaithful__cell10__out00.png>]
+[12 <./figures/L96_PaperFaithful__cell19__out00.png>]
+[13 <./figures/L96_PaperFaithful__cell20__out00.png>]
+[14 <./figures/L96_PaperFaithful__cell28__out00.png>]) (./_sections/results_kflow.tex
+[15 <./figures/L96_SlidingWindow__cell27__out00.png>]
+[16]
+
+LaTeX Warning: Float too large for page by 148.48389pt on input line 63.
+
+) (./_sections/discussion.tex
+
+Package natbib Warning: Citation `frerix2021invobs' on page 17 undefined on input line 6.
+
+
+[17]
+[18]
+
+Package natbib Warning: Citation `frerix2021invobs' on page 19 undefined on input line 121.
+
+) (./main.bbl
+[19])
+
+Package natbib Warning: There were undefined citations.
+
+
+[20]
+[21 <./figures/L96_SlidingWindow__cell30__out00.png>]
+[22 <./figures/L96_SlidingWindow__cell31__out00.png>]
+[23 <./figures/L96_SlidingWindow__cell34__out00.png>]
+[24 <./figures/L96_SlidingWindow__cell36__out00.png>]
+[25 <./figures/KFlow_Full4DVar__cell06__out00.png> <./figures/KFlow_SlidingWindow__cell19__out00.png>]
+[26 <./figures/KFlow_SlidingWindow__cell24__out00.png>]
+[27 <./figures/KFlow_SlidingWindow__cell27__out00.png>]
+[28 <./figures/KFlow_SlidingWindow__cell31__out00.png>]
+[29 <./figures/KFlow_SlidingWindow__cell33__out00.png>] (./main.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )<c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (29 pages, 1916127 bytes).
+Transcript written on main.log.
+Latexmk: Getting log file 'main.log'
+Latexmk: Examining 'main.fls'
+Latexmk: Examining 'main.log'
+Latexmk: Found input bbl file 'main.bbl'
+Latexmk: References changed.
+Latexmk: References changed.
+Latexmk: Log file says output to 'main.pdf'
+Latexmk: Using bibtex to make bibliography file(s).
+  ===Source file 'main.bbl' for 'pdflatex'
+Latexmk: Found bibliography file(s):
+  ./references.bib
+Latexmk: applying rule 'bibtex main'...
+Rule 'bibtex main':  Reasons for rerun
+Changed files or newly in use/created:
+  main.aux
+
+------------
+Run number 2 of rule 'bibtex main'
+------------
+------------
+Running 'bibtex  "main.aux"'
+------------
+This is BibTeX, Version 0.99d (TeX Live 2025)
+The top-level auxiliary file: main.aux
+The style file: unsrtnat.bst
+Database file #1: references.bib
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Changed files or newly in use/created:
+  main.aux
+
+------------
+Run number 3 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -recorder  "main.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-09-02>
+(c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size11.clo)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/bm.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def) (./main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)) (./main.out) (./main.out) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd) (./_sections/intro.tex
+[1{c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2]) (./_sections/background.tex
+[3]) (./_sections/methods.tex
+[4]
+[5]
+[6 <./figures/noise_distributions.png>]
+[7]) (./_sections/results_l96.tex
+[8]
+[9 <./figures/L96_Integrator__cell08__out00.png>]
+[10 <./figures/L96_Integrator__cell10__out00.png>]
+[11 <./figures/L96_PaperFaithful__cell10__out00.png>]
+[12 <./figures/L96_PaperFaithful__cell19__out00.png>]
+[13 <./figures/L96_PaperFaithful__cell20__out00.png>]
+[14 <./figures/L96_PaperFaithful__cell28__out00.png>]) (./_sections/results_kflow.tex
+[15 <./figures/L96_SlidingWindow__cell27__out00.png>]
+[16]
+
+LaTeX Warning: Float too large for page by 148.48389pt on input line 63.
+
+) (./_sections/discussion.tex
+[17]
+[18]) (./main.bbl
+[19])
+[20]
+[21 <./figures/L96_SlidingWindow__cell30__out00.png>]
+[22 <./figures/L96_SlidingWindow__cell31__out00.png>]
+[23 <./figures/L96_SlidingWindow__cell34__out00.png>]
+[24 <./figures/L96_SlidingWindow__cell36__out00.png>]
+[25 <./figures/KFlow_Full4DVar__cell06__out00.png> <./figures/KFlow_SlidingWindow__cell19__out00.png>]
+[26 <./figures/KFlow_SlidingWindow__cell24__out00.png>]
+[27 <./figures/KFlow_SlidingWindow__cell27__out00.png>]
+[28 <./figures/KFlow_SlidingWindow__cell31__out00.png>]
+[29 <./figures/KFlow_SlidingWindow__cell33__out00.png>] (./main.aux) )<c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/Users/ericx/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (29 pages, 1917908 bytes).
+Transcript written on main.log.
+Latexmk: Getting log file 'main.log'
+Latexmk: Examining 'main.fls'
+Latexmk: Examining 'main.log'
+Latexmk: Found input bbl file 'main.bbl'
+Latexmk: Log file says output to 'main.pdf'
+Latexmk: Using bibtex to make bibliography file(s).
+  ===Source file 'main.bbl' for 'pdflatex'
+Latexmk: Found bibliography file(s):
+  ./references.bib
+Latexmk: All targets (main.pdf) are up-to-date
+
+Reverting Windows console CPs to (in,out) = (437,437)

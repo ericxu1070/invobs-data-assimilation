@@ -1,0 +1,9 @@
+Initial Win CP for (console input, console output, system): (CP437, CP437, CP1252)
+I changed them all to CP1252
+Rc files read:
+  NONE
+Latexmk: This is Latexmk, John Collins, 15 June 2025. Version 4.87.
+Latexmk: Nothing to do for 'main.tex'.
+Latexmk: All targets (main.pdf) are up-to-date
+
+Reverting Windows console CPs to (in,out) = (437,437)
