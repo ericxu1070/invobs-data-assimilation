@@ -1,0 +1,139 @@
+\section{Discussion and Conclusion}
+
+\subsection{Summary of findings}
+
+Our experiments tested whether the learned inverse-observation idea of
+\citet{frerix2021invobs} survives a more operationally realistic setting: the
+full four-dimensional variational data assimilation (4D-Var) cost
+$J = \Jb + \Jo$ with an explicit background term and observation-error
+covariance, Gaussian observation noise on every measurement, and an
+operational sliding-window (cycling) extension. The central claim of the
+paper broadly held. On Lorenz-96, under the tuned-$\sigb$ full 4D-Var cost,
+learned-inverse-observation initialization combined with hybrid
+(physics-space then observation-space) optimization attained the lowest
+analysis root-mean-square error (RMSE) at every tested noise level
+($\rmse = 0.620$, $1.168$, and $1.676$ at $\sigobs = 0.1$, $0.5$, and $1.0$
+respectively). Equally important, hybrid optimization rescued the cheap
+climatological-mean baseline from the bad observation-space local minima that
+trap pure observation-space 4D-Var when only $10$ of $40$ components are
+observed: it roughly halved the analysis error (for example $2.393 \to 1.223$
+at $\sigobs = 0.5$). The same mechanism appeared in the sliding-window
+experiments, where baseline initialization with observation-only optimization
+remained stuck near the climatological RMSE while every hybrid-warm-started
+method reached an analysis RMSE near $1$ at $\sigobs = 0$. Cycling delivered a
+real but conditional benefit: the per-cycle analysis dropped below the
+single-window reference once history accumulated, and the advantage was
+clearest at higher noise and longer observation horizons
+($\sigobs = 0.5$, $T_{\mathrm{obs}} = 48$), while being marginal at
+$\sigobs = 0$, where a single well-posed window already over-determines the
+observed components. On 2D Kolmogorov flow the qualitative story carried over:
+learned-inverse-observation initialization placed L-BFGS in a basin roughly
+$3\times$ lower in cost than bicubic interpolation (final losses $56{,}385$
+and $45{,}760$ for the invobs combinations versus $168{,}341$ and $138{,}254$
+for the baseline), and produced the best in-window analyses. In every case,
+once the chaotic forecast left the assimilation window all methods relaxed to
+the same climatological saturation, consistent with the short measured
+Lyapunov time of the system---analysis quality improves the short-lead
+forecast, not the Lyapunov-limited long-range predictability.
+
+\subsection{Caveats and limitations}
+
+This is a course capstone, and several limitations should temper how strongly
+its conclusions are read.
+
+\emph{Small ensembles.} The tuned-$\sigb$ Lorenz-96 sweep used only $N = 16$
+trajectories, the sliding-window runs used $N = 50$, and the Kolmogorov
+sliding-window runs used only $N = 8$. Consequently several ``best''
+selections---the best stride, the best single-window method at $\sigobs = 0$,
+and the cycling-versus-single-window margin in the clean-observation
+cases---fall within ensemble scatter and should be read as tendencies rather
+than decisive separations.
+
+\emph{Compute-limited Kolmogorov runs.} The Kolmogorov solver relies on
+\texttt{torch.fft.rfft2}, which ran on the CPU only (no graphics processing
+unit, GPU), so all 2D experiments were validation-scale: a tiny ensemble, a
+lightweight inverter trained on only a few hundred trajectories for a few tens
+of epochs rather than the paper-scale $32{,}000$ trajectories and $500$
+epochs, and a single observation-noise level. These runs demonstrate the
+pipeline mechanics and reproduce the qualitative basin-of-attraction benefit,
+but they are not converged scientific results, and the cycling machinery did
+not yet separate from a single well-initialized window at this scale.
+Relatedly, the warmup diagnostic reached only approximate quasi-stationarity
+(a last-$20$-step enstrophy drift of about $10.8\%$, marginally above the
+$\lesssim 10\%$ heuristic), a direct artifact of the short single-trajectory
+diagnostic.
+
+\emph{Inverter trained at one noise level.} The learned inverse observation
+operator $\Hinv$ is supervised at a fixed noise level and then, in some cells,
+evaluated under a deliberate mismatch. This probes robustness but means the
+inverter is never optimal for the noise it actually encounters; a per-noise
+checkpoint was supplied only where feasible.
+
+\emph{Short measured Lyapunov time.} Our fixed-step fourth-order
+Runge--Kutta (RK4) integrator yields a fitted Lyapunov time
+$T_L = 0.442$ model time units (MTU), shorter than the paper's expected
+$\sim 0.6$ MTU. We report this honestly as a known consequence of the coarse
+fixed step being slightly too coarse to resolve the fastest unstable
+directions. It sets the chaotic saturation rate to which every method relaxes
+in the forecast and slightly tightens the window over which our RK4 and an
+adaptive Dormand--Prince (dopri5) integrator represent the same physics
+(median crossover $t^\star = 7.70$ MTU); our assimilation windows
+($T = 1.0$ MTU) sit comfortably inside that horizon, so the integrator choice
+does not contaminate the data assimilation (DA) results.
+
+\emph{The negative $\sigb$-ordering result.} We expected
+invobs$+$hybrid to prefer a \emph{smaller} optimal background weight $\sigb$
+than the paper baseline, since the learned lift should make the analysis trust
+the data more. This did not hold: invobs$+$hybrid selected
+$\sigb = 10.0/1.0/1.0$ while paper$+$obs selected $\sigb = 0.1/0.3/0.3$, the
+opposite direction at all three noise levels. Moreover, tuning $\sigb$ helped
+only marginally over the untuned $\sigb = 1$ in most cells (gains typically
+below $0.2$ RMSE, and exactly zero where the best $\sigb$ was already $1.0$).
+
+\emph{No real data and simplified covariances.} All experiments are on
+synthetic, perfect-model trajectories with no model error, and our covariances
+are deliberately simple: a single static spatial-correlation matrix $\bm C$
+(condition number $8.72$) for the Lorenz-96 background $\Bcov = \sigb^2 \bm C$,
+a diagonal observation-error covariance $\Rcov = \sigobs^2 \bm I$ with
+independent noise, and for Kolmogorov flow an identity background
+$\Bcov = \sigb^2 \bm I$ because forming and factorizing a full
+$4096 \times 4096$ spatial covariance was prohibitively expensive. None of
+these capture the flow-dependent, correlated error structures of an
+operational system.
+
+\subsection{Future work}
+
+Each limitation suggests a concrete next step. The inverter could be made
+\emph{noise-aware}---either a family of per-noise checkpoints or a single
+network conditioned on $\sigobs$---so that $\Hinv$ is always matched to the
+observation error it encounters. The Kolmogorov pipeline should be moved to a
+GPU and rerun at paper scale, with much larger ensembles, a fully trained
+inverter, and a sweep over multiple noise levels, so that the cycling
+extension can be evaluated where it has a chance to separate from a single
+window. On the statistical side, both covariances invite enrichment: a
+\emph{correlated} observation-error covariance $\Rcov$ in place of the diagonal
+$\sigobs^2 \bm I$, and a flow-dependent background covariance estimated from an
+ensemble (an ensemble or hybrid ensemble-variational scheme) in place of the
+static $\bm C$, which is also the natural route to a tractable background
+covariance for the 2D flow without forming the full dense matrix. Finally, an
+adaptive integrator (dopri5) would produce paper-matched trajectories with the
+expected Lyapunov time, removing the fixed-step artifact and enabling a cleaner
+quantitative comparison against \citet{frerix2021invobs}; larger ensembles
+throughout would turn the present tendencies into statistically firm claims.
+
+\subsection{Conclusion}
+
+Across both a 1D chaotic toy model and a 2D turbulent flow, and under a full
+4D-Var cost with noisy observations that the original study did not consider,
+the learned inverse observation operator continued to help where it was
+designed to: it provides a physics-space initialization and a near-convex
+hybrid objective that together place gradient-based 4D-Var in a good basin and
+yield the lowest analysis error, especially when sparse, lossy observations
+would otherwise trap pure observation-space optimization. The operational
+sliding-window extension showed that cycling can further reduce analysis error
+as history accumulates, most clearly when observations are noisy. At the same
+time we report honest negatives---an unmet expectation about the optimal
+background weight, a short integrator-limited Lyapunov time, and
+compute-limited 2D runs---that mark exactly where larger ensembles, GPU-scale
+Kolmogorov experiments, richer covariances, and an adaptive integrator would
+turn these encouraging tendencies into firm conclusions.

@@ -1,0 +1,104 @@
+\section{Introduction}
+
+Numerical weather prediction (NWP) launches a forecast by integrating a numerical
+model of the atmosphere forward from an estimate of its current state. Because the
+atmosphere is observed only incompletely, indirectly, and noisily, producing that
+initial estimate is itself an inverse problem: given a forecast model and a stream of
+imperfect measurements distributed in space and time, recover the system state well
+enough to forecast from it. This is the task of data assimilation (DA), and it is the
+component of an operational NWP system that most directly limits forecast skill
+\citep{kalnay2003atmospheric}. The flagship variational method is
+four-dimensional variational data assimilation (4D-Var)
+\citep{ledimet1986variational, courtier1994strategy}, which estimates the initial
+condition $\xstate_0$ of an assimilation window by minimizing a cost that balances a
+prior (``background'') estimate against the misfit between the model trajectory and the
+observations spread across that window.
+
+DA is hard precisely because the systems of interest are chaotic: small errors in the
+analysis (the assimilated initial state) grow exponentially, so the analysis must be
+accurate and the optimization landscape is treacherous. The Lorenz-96 model
+\citep{lorenz1996predictability} is the canonical low-order testbed for exactly this
+difficulty, and it is the primary one-dimensional (1D) system we study here. In our
+configuration (grid size 40, forcing $F=8$), trajectories started $10^{-6}$ apart
+separate at a fitted exponential rate $\lambda = 2.263\,/\mathrm{MTU}$, corresponding to
+a Lyapunov time $T_L = 1/\lambda = 0.442$ model time unit (MTU); this is somewhat
+shorter than the $\sim$0.6 MTU expected from the original study, a known artifact of our
+fixed-step integrator that we report honestly. Because errors saturate within roughly a
+Lyapunov time, an inaccurate analysis cannot be rescued downstream, and this is the
+regime in which a better treatment of the observations is supposed to help.
+
+\paragraph{The learned inverse-observation idea.}
+\citet{frerix2021invobs} study the variational problem of recovering an initial state
+$\xstate_0$ whose model trajectory $\Mop^t(\xstate_0)$ fits a sequence of observations.
+The observation operator $\Hop$ in their setting (and ours) is a sparse spatial
+subsampling: it keeps every fourth grid point for Lorenz-96 (10 of 40 points observed)
+and every sixteenth point in each direction for two-dimensional (2D) Kolmogorov flow (a
+$4\times4=16$ of 4096 points observed). Because $\Hop$ is many-to-one and highly lossy,
+the standard observation-space objective
+$\lVert \Hop\,\Mop^t(\xstate_0) - \yobs_t\rVert^2$ is strongly non-convex and riddled
+with bad local minima, so a poorly initialized gradient-based optimizer gets trapped.
+Their contribution is to train a convolutional neural network (CNN) that acts as a
+learned inverse observation operator $\Hinv$, mapping an observation sequence back into
+physics (state) space. They use it in two complementary ways: as a better
+\emph{initialization} (lift the observations to a physics-space first guess
+$\Hinv(Y)$ instead of a naive interpolation or average), and as a \emph{reformulation of
+the loss} (replace the observation-space misfit with a physics-space misfit
+$\sum_t \lVert \Mop^t(\xstate_0) - [\Hinv(Y)]_t\rVert^2$, which removes the lossy $\Hop$
+from inside the objective and is therefore much closer to convex). They further propose
+an optional \emph{hybrid} schedule: run the smoother physics-space optimization first as
+a warm start, then refine against the true observations in observation space. Crucially
+for our work, the original study assimilates \emph{clean} observations and uses a
+\emph{simplified} objective (the observation-misfit term only, with no background term
+and no explicit observation-error covariance), and its reference implementation is in
+JAX/Flax.
+
+\paragraph{Our contribution.}
+This capstone tests whether the learned inverse-observation idea survives a more
+operationally realistic setting, through four changes. (i)~\emph{Full 4D-Var cost.}
+We replace the paper's observation-misfit-only objective with the complete 4D-Var cost
+$J(\xstate_0) = \Jb + \Jo$,
+\[
+  J(\xstate_0) = \tfrac12 (\xstate_0-\xstate_b)^\top \Bcov^{-1} (\xstate_0-\xstate_b)
+  + \tfrac12 \sum_{t} \big(\Hop \Mop^t(\xstate_0) - \yobs_t\big)^\top \Rcov^{-1}
+    \big(\Hop \Mop^t(\xstate_0)-\yobs_t\big),
+\]
+with background covariance $\Bcov = \sigb^2 \bm{C}$ ($\bm{C}$ the system's spatial
+correlation) and observation-error covariance $\Rcov = \sigobs^2 \bm{I}$. The background
+term pulls the analysis toward a prior $\xstate_b$ and is what makes the problem
+well-posed when observations are sparse; $\sigb$ is the background-error standard
+deviation we tune and $\sigobs$ the observation-error standard deviation.
+(ii)~\emph{Observation noise.} Every experiment adds independent Gaussian observation
+noise with $\sigobs \in \{0.1, 0.5, 1.0\}$ (the paper used clean observations), which
+both stress-tests robustness and probes a deliberate mismatch, since the inverter is
+trained at one noise level and evaluated at others. (iii)~\emph{Sliding-window cycling.}
+We add an operational sliding-window (cycling) 4D-Var extension in which short
+assimilation windows are advanced through time and each cycle's analysis is propagated
+forward to form the background for the next window---the way 4D-Var is actually run
+operationally, in contrast to the paper's single fixed window.
+(iv)~\emph{PyTorch reimplementation.} We rebuild the entire pipeline in PyTorch
+\citep{paszke2019pytorch}---the dynamical-system integrators, the CNN inverter, the
+correlation preconditioning, and the data-assimilation loop solved with the
+limited-memory Broyden--Fletcher--Goldfarb--Shanno (L-BFGS) optimizer
+\citep{liu1989limited}.
+
+Our headline finding is that the paper's central claim broadly holds under these harder
+conditions: learned-inverse-observation initialization combined with hybrid optimization
+attains the lowest analysis root-mean-square error (RMSE) at every tested noise level,
+and hybrid optimization dramatically rescues a cheap climatological-mean baseline that
+observation-only optimization leaves stuck in a bad local minimum. We also report honest
+negative results, notably that a secondary expectation about how the optimal $\sigb$
+should shift did not hold, and that on the smoke-scale Kolmogorov-flow runs the cycling
+extension does not yet show a decisive advantage.
+
+\paragraph{Roadmap.}
+The remainder of the paper is organized as follows. Section~2 summarizes the learned
+inverse-observation approach of \citet{frerix2021invobs} and states precisely how we
+extend it. Section~3 describes the models and methods: the Lorenz-96 and Kolmogorov-flow
+dynamical systems and their integrators, the observation-noise model, the full 4D-Var
+cost and its physics-space hybrid companion, the learned inverse observation operator,
+the decorrelation preconditioning, and the sliding-window cycling scheme. Section~4
+presents results, first for Lorenz-96 (integrator diagnostics, inverter training,
+baseline initialization, the tuned-$\sigb$ full 4D-Var sweep, and the sliding-window
+experiments) and then for two-dimensional Kolmogorov flow. Section~5 discusses
+limitations and caveats, separating what reproduces the paper from what our extensions
+add, and concludes.

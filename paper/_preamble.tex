@@ -1,0 +1,38 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% --- convenience macros for consistent notation across the paper ---
+\newcommand{\xstate}{\bm{x}}          % physical state
+\newcommand{\yobs}{\bm{y}}            % observation
+\newcommand{\Hop}{H}                  % observation operator
+\newcommand{\Hinv}{H^{-1}_{\theta}}  % learned inverse observation operator
+\newcommand{\Mop}{\mathcal{M}}        % forward model / integrator
+\newcommand{\Jb}{J_{\mathrm{b}}}     % background cost
+\newcommand{\Jo}{J_{\mathrm{o}}}     % observation cost
+\newcommand{\Bcov}{\bm{B}}           % background covariance
+\newcommand{\Rcov}{\bm{R}}           % observation covariance
+\newcommand{\sigb}{\sigma_{\mathrm{b}}}
+\newcommand{\sigobs}{\sigma_{\mathrm{obs}}}
+\newcommand{\rmse}{\mathrm{RMSE}}
+
+\title{\textbf{Full Four-Dimensional Variational Data Assimilation with a\\
+Learned Inverse Observation Operator under Observation Noise}}
+
+\author{
+  Eric Xu \and Javier Sanchez \and Jiayang Wu \and Wilson Xie \and Edmund Xu \\[4pt]
+  \small AM 170B --- Applied Mathematics Capstone
+}
+
+\date{May 2026}

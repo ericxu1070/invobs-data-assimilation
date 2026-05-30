@@ -1,0 +1,79 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% --- convenience macros for consistent notation across the paper ---
+\newcommand{\xstate}{\bm{x}}          % physical state
+\newcommand{\yobs}{\bm{y}}            % observation
+\newcommand{\Hop}{H}                  % observation operator
+\newcommand{\Hinv}{H^{-1}_{\theta}}  % learned inverse observation operator
+\newcommand{\Mop}{\mathcal{M}}        % forward model / integrator
+\newcommand{\Jb}{J_{\mathrm{b}}}     % background cost
+\newcommand{\Jo}{J_{\mathrm{o}}}     % observation cost
+\newcommand{\Bcov}{\bm{B}}           % background covariance
+\newcommand{\Rcov}{\bm{R}}           % observation covariance
+\newcommand{\sigb}{\sigma_{\mathrm{b}}}
+\newcommand{\sigobs}{\sigma_{\mathrm{obs}}}
+\newcommand{\rmse}{\mathrm{RMSE}}
+
+\title{\textbf{Full Four-Dimensional Variational Data Assimilation with a\\
+Learned Inverse Observation Operator under Observation Noise}}
+
+\author{
+  Eric Xu \and Javier Sanchez \and Jiayang Wu \and Wilson Xie \and Edmund Xu \\[4pt]
+  \small AM 170B --- Applied Mathematics Capstone
+}
+
+\date{May 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Variational data assimilation (DA) estimates the initial state of a dynamical system by fitting a
+model trajectory to sparse observations, but when the observation operator is non-invertible the
+resulting cost function is riddled with poor local minima. Frerix et al. (2021) addressed this by
+training a learned inverse observation operator---a convolutional neural network (CNN) that lifts
+observations back into physical space---and using it to initialize and reshape the assimilation
+objective. We reimplement their approach in PyTorch and extend it in three ways: we replace their
+simplified observation-misfit objective with the full four-dimensional variational (4D-Var) cost,
+adding an explicit background term and observation-error covariance; we corrupt every experiment
+with additive Gaussian observation noise at three magnitudes; and we wrap the solver in an
+operational sliding-window (cycling) scheme for long-horizon assimilation. We evaluate on two
+systems: the one-dimensional (1D) Lorenz-96 model and two-dimensional (2D) Kolmogorov flow, an
+incompressible Navier--Stokes system. Across all noise levels, learned-inverse initialization
+combined with hybrid (physics-space then observation-space) optimization yields the lowest analysis
+root-mean-square error (RMSE), and sliding-window cycling stabilizes assimilation over horizons
+where single-window 4D-Var degrades. We also report honest negative results, including a background
+weight that tuned only marginally and an unexpected optimal-variance ordering.
+\end{abstract}
+
+\input{_sections/intro.tex}
+\input{_sections/background.tex}
+\input{_sections/methods.tex}
+
+\section{Results}
+We present results for the two test systems in turn: first the one-dimensional Lorenz-96 model,
+then two-dimensional Kolmogorov flow.
+
+\input{_sections/results_l96.tex}
+\input{_sections/results_kflow.tex}
+
+\input{_sections/discussion.tex}
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\end{document}

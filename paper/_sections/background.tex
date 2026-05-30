@@ -1,0 +1,37 @@
+\section{Background: The Learned Inverse-Observation Approach and Our Extensions}
+\label{sec:background}
+
+\subsection{The Method We Extend}
+
+DA estimates the state of a dynamical system from a forecast model together with a stream of incomplete, indirect, and noisy observations, so that a forecast can be launched from the resulting analysis~\citep{kalnay2003atmospheric}. The flagship operational method is 4D-Var, which recovers the initial condition $\xstate_0$ of a forecast window by minimizing a cost that balances a prior estimate against the misfit between the model trajectory and observations distributed in time~\citep{ledimet1986variational,courtier1994strategy}. The difficulty is intrinsic to the chaotic systems that DA targets: in the Lorenz-96 testbed~\citep{lorenz1996predictability} small errors grow exponentially, so the analysis must be accurate and the optimization landscape is treacherous.
+
+\citet{frerix2021invobs} study the variational problem of recovering an initial state $\xstate_0$ whose model trajectory $\Mop^t(\xstate_0)$ fits a sequence of observations. The observation operator $\Hop$ is a sparse spatial subsampling: it retains every fourth grid point for Lorenz-96 (10 of 40 sites observed) and every sixteenth point in each direction for 2D Kolmogorov flow (a $4\times 4 = 16$ of 4096 sites observed). Because $\Hop$ is many-to-one and highly lossy, the standard observation-space objective $\lVert \Hop\,\Mop^t(\xstate_0) - \yobs_t\rVert^2$ is strongly non-convex and riddled with bad local minima, and a gradient-based optimizer started from a poor first guess is easily trapped.
+
+The contribution of \citet{frerix2021invobs} is to train a CNN that acts as a learned inverse observation operator $\Hinv$, mapping an observation sequence $Y$ back into physical-state space. They exploit this operator in two complementary ways. First, as a better \emph{initialization}: the observations are lifted to a physics-space first guess $\Hinv(Y)$ instead of a naive interpolation or averaging baseline. Second, as a \emph{reformulation of the loss}: the lossy observation-space misfit is replaced by a physics-space misfit
+\[
+\sum_t \bigl\lVert \Mop^t(\xstate_0) - [\Hinv(Y)]_t \bigr\rVert^2,
+\]
+which is much closer to convex because it removes $\Hop$ from inside the objective. They further propose an optional \emph{hybrid} schedule: run physics-space optimization first as a warm start, then refine against the true observations in observation space, thereby keeping the smoother physics-space basin of attraction while finishing on the genuine measurement misfit. The approach is demonstrated on two systems --- Lorenz-96 (one-dimensional) and 2D Kolmogorov flow (incompressible Navier--Stokes with Kolmogorov forcing) --- and the reference implementation is in JAX/Flax with a JAX-CFD solver for the flow~\citep{kochkov2021machine}.
+
+Crucially for our work, the original study makes two simplifications. It assimilates \emph{clean} observations with no added measurement noise, and it minimizes an objective that contains \emph{only} the observation-misfit term: there is no background (prior) term and no explicit observation-error covariance.
+
+\subsection{Our Extensions}
+
+Our capstone asks whether the learned-inverse-observation idea survives a more operationally realistic setting. We make four changes, each stated precisely below.
+
+\begin{enumerate}
+  \item \textbf{Full 4D-Var cost.} We replace the observation-misfit-only objective with the complete 4D-Var cost $J(\xstate_0) = \Jb + \Jo$ that includes a background term and an explicit observation-error covariance,
+  \[
+  J(\xstate_0) = \tfrac12 (\xstate_0-\xstate_b)^\top \Bcov^{-1} (\xstate_0-\xstate_b)
+  + \tfrac12 \sum_{t} (\Hop \Mop^t(\xstate_0) - \yobs_t)^\top \Rcov^{-1} (\Hop \Mop^t(\xstate_0)-\yobs_t),
+  \]
+  with background covariance $\Bcov = \sigb^2 \bm{C}$ (where $\bm{C}$ is the system's spatial correlation) and observation-error covariance $\Rcov = \sigobs^2 \bm{I}$. The background term $\Jb$ pulls the analysis toward a prior $\xstate_b$ and is what makes the problem well-posed when observations are sparse; $\sigb$ is the background-error standard deviation we tune and $\sigobs$ is the observation-error standard deviation. The physics-space hybrid companion cost analogously replaces $\Jo$ with $\tfrac{1}{2\sigma_p^2}\sum_t \lVert \Mop^t(\xstate_0) - [\Hinv(Y)]_t\rVert^2$.
+
+  \item \textbf{Observation noise.} Every experiment now corrupts the observations with independent additive Gaussian noise, $\yobs = \Hop(\xstate) + \boldsymbol\varepsilon$ with $\boldsymbol\varepsilon \sim \mathcal{N}(0, \sigobs^2 \bm{I})$, at noise levels $\sigobs \in \{0.1, 0.5, 1.0\}$ (the original paper used clean observations). This tests robustness and also probes a deliberate mismatch, since the inverter is trained at one noise level and evaluated at others.
+
+  \item \textbf{Sliding-window (cycling) 4D-Var.} We add an operational cycling extension in which a short assimilation window is advanced through time and each cycle's analysis is propagated forward to form the background for the next window --- the way 4D-Var is actually run operationally --- in contrast to the paper's single fixed window.
+
+  \item \textbf{PyTorch reimplementation.} We reimplement the entire pipeline in PyTorch~\citep{paszke2019pytorch} (the original is JAX/Flax), including the dynamical-system integrators, the CNN inverter, the correlation preconditioning, and the L-BFGS-driven DA loop.
+\end{enumerate}
+
+Two implementation choices that the Methods section develops are worth flagging here so the cost above reads unambiguously. For Lorenz-96 the optimization is carried out in decorrelated coordinates $\bm{z} = \bm{C}^{-1/2}\xstate$, which turns the background term into the isotropic $\lVert\bm{z}_0-\bm{z}_b\rVert^2/(2\sigb^2)$; the measured spatial-correlation matrix $\bm{C}$ has condition number $8.72$ and climatological mean near $2.34$. For 2D Kolmogorov flow we optimize the vorticity field directly with $\Bcov = \sigb^2 \bm{I}$ (no decorrelation), because forming and factorizing a full $4096\times 4096$ spatial covariance is prohibitively expensive. We report results honestly, separating ``reproduced the paper'' from ``our extensions'' and flagging negative findings and smoke-scale caveats (small ensembles, the CPU-limited Kolmogorov runs, the noise-level mismatch above, and a short Lyapunov time induced by the fixed-step integrator) where they arise.
