@@ -12,8 +12,7 @@ outer step $t$ integrated from the initial condition $\xstate_0$, $\Hop$ is the
 
 \subsection{Dynamical systems}
 
-The first testbed is the 1D Lorenz-96 model
-\citep{lorenz1996predictability}, a periodic chain of $K=40$ grid points
+The first testbed is the 1D Lorenz-96 model, a periodic chain of $K=40$ grid points
 evolving under the ordinary differential equation (ODE)
 \begin{equation}
 \dot{x}_k = (x_{k+1}-x_{k-2})\,x_{k-1} - x_k + F,
@@ -29,7 +28,7 @@ observed at only $10$ sites.
 
 To check that this fixed-step integrator is faithful at the short horizons
 relevant to assimilation, we compared it against an adaptive Dormand--Prince
-(dopri5) solver \citep{dormand1980family}. Starting from identical attractor
+(dopri5) solver. Starting from identical attractor
 states, the $L^2$ trajectory divergence stays near machine precision while
 $t \ll T_L$ and first reaches the order-one (state-norm) scale at a median
 $t^{\star}=7.70$ MTU (range $[6.50,8.30]$ over five warmed-up states; $6.30$ MTU
@@ -47,7 +46,7 @@ The second testbed is 2D Kolmogorov flow: the vorticity form
 of the incompressible Navier--Stokes equations (a partial differential
 equation, PDE) on the periodic domain $[0,2\pi]^2$ with sinusoidal Kolmogorov
 forcing at wavenumber $k=4$, viscosity $\nu=10^{-2}$, and linear (Rayleigh)
-drag $\alpha=0.1$, following the solver design of \citet{kochkov2021machine}.
+drag $\alpha=0.1$.
 The state is a single vorticity field $\omega$ on a $64\times 64$ grid
 ($4096$ degrees of freedom), advanced with a pseudo-spectral RK4 solver at outer
 step $0.18$ composed of $25$ inner substeps. Here $\Hop$ subsamples every
@@ -83,9 +82,9 @@ the cost, $\sigobs$ doubles as the inverse-variance weight on the observation
 term; the perfect-observation case is handled by flooring it (at $0.1$ for
 Lorenz-96 and $0.05$ for Kolmogorov flow) so that $\Jo$ remains finite.
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.95\linewidth]{noise_distributions.png}
+  \includegraphics[width=0.68\linewidth]{noise_distributions.png}
   \caption{Gaussian observation-noise probability density functions used to
   corrupt the observations in every experiment. Each curve is the density of
   $\varepsilon \sim \mathcal{N}(0, \sigobs^2)$ for one of the three noise
@@ -103,7 +102,7 @@ Lorenz-96 and $0.05$ for Kolmogorov flow) so that $\Jo$ remains finite.
 \subsection{The full 4D-Var cost}
 
 Our central extension replaces the paper's bare observation-misfit objective
-with the complete 4D-Var cost \citep{ledimet1986variational,courtier1994strategy},
+with the complete 4D-Var cost,
 $J(\xstate_0) = \Jb + \Jo$, where
 \begin{equation}
 J(\xstate_0)
@@ -142,13 +141,13 @@ spatial axis receives \emph{circular} padding (matching the periodic boundary
 conditions) while the time axis receives \emph{zero} padding, after which the
 low-resolution observation grid is upsampled to the full grid.
 
-We implement two PyTorch \citep{paszke2019pytorch} variants. The
+We implement two PyTorch variants. The
 \emph{original-port} inverter uses a hidden width of $32$ over six residual
 periodic-convolution blocks with Gaussian error linear unit (GELU) activations
 and bilinear spatial upsampling. The \emph{paper-faithful} inverter follows the
 architecture of \citet{frerix2021invobs} more closely: sigmoid linear unit
-(SiLU) activations \citep{elfwing2018sigmoid}, batch normalization (BN) after
-every convolution \citep{ioffe2015batch}, cubic periodic upsampling, and a
+(SiLU) activations, batch normalization (BN) after
+every convolution, cubic periodic upsampling, and a
 decreasing channel pyramid of widths $128/64/32/16$ with no skip connections.
 Both are trained by supervised regression --- integrate trajectories, apply
 $\Hop$ (plus noise), and fit the network to recover the full state under a
@@ -179,7 +178,7 @@ interpolation or climatological-mean baseline.
 \subsection{Optimization}
 
 All variational sub-problems are solved with the L-BFGS quasi-Newton method
-\citep{liu1989limited} using a strong-Wolfe line search. The entire
+using a strong-Wolfe line search. The entire
 $N$-sample ensemble is optimized in a single batched L-BFGS call: because each
 row's gradient depends only on its own observations, the batched problem is
 exactly equivalent to $N$ independent 4D-Var problems. The hybrid schedule

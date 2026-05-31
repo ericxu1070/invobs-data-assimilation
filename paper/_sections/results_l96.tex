@@ -9,10 +9,10 @@ sweep; and finally the sliding-window (cycling) experiments.
 
 \subsubsection{Integrator and Lyapunov diagnostics}
 
-Our PyTorch \citep{paszke2019pytorch} port integrates Lorenz-96 (grid size $40$,
+Our PyTorch port integrates Lorenz-96 (grid size $40$,
 forcing $F=8$) with a fixed-step RK4 scheme, ten inner
 substeps of $\Delta t = 0.01$ per outer step $dt = 0.1$, whereas the reference paper
-uses an adaptive dopri5 solver \citep{dormand1980family}. To check
+uses an adaptive dopri5 solver. To check
 that this choice does not contaminate the DA results, we propagate
 the same warmed-up attractor state $200$ outer steps ($20$ MTU) with
 both integrators and measure the $L^2$ state divergence
@@ -35,39 +35,34 @@ length over which the two simulators represent the same physics: our single-wind
 experiments use $T = 10$ outer steps ($=1.0$ MTU), comfortably inside $t^\ast$, so the
 integrator choice does not affect the DA conclusions below.
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.7\linewidth]{L96_Integrator__cell08__out00.png}
+  \includegraphics[width=0.58\linewidth]{L96_Integrator__cell08__out00.png}
   \caption{Fixed-step RK4 versus adaptive dopri5 integrator divergence
-  on Lorenz-96. The vertical axis (log scale) is the $L^2$ state difference
-  $\lVert \xstate_{\mathrm{RK4}}(t)-\xstate_{\mathrm{adapt}}(t)\rVert_2$ and the
-  horizontal axis is model time $t$ in MTU. The solid blue curve is the median over five
-  warmed-up attractor states and the shaded band is the min/max envelope; the dashed grey
-  line marks the order-one threshold. From identical initial conditions the two
-  integrators agree to near machine precision while $t \ll T_L$, then the per-step
-  truncation difference is amplified at the chaotic rate, crossing the order-one scale at
-  a median $t^\ast = 7.70$ MTU (range $[6.50, 8.30]$; $6.30$ MTU for the single trajectory
-  shown in the first panel) and saturating near $28.5$ once the trajectories fully
-  decorrelate. The takeaway is that $t^\ast$ is the operational ceiling on
-  assimilation-window length over which the two simulators represent the same physics; our
-  single-window experiments use $T = 1.0$ MTU, comfortably inside it.}
+  on Lorenz-96. Vertical axis (log scale): the $L^2$ state difference
+  $\lVert \xstate_{\mathrm{RK4}}(t)-\xstate_{\mathrm{adapt}}(t)\rVert_2$; horizontal axis:
+  model time $t$ in MTU. The solid blue curve is the median over five warmed-up attractor
+  states, the shaded band the min/max envelope, and the dashed grey line marks the
+  order-one threshold. The two integrators agree to near machine precision while
+  $t \ll T_L$, then diverge at the chaotic rate, crossing the order-one scale at a median
+  $t^\ast = 7.70$ MTU and saturating near $28.5$. Our single-window experiments use
+  $T = 1.0$ MTU, comfortably inside $t^\ast$, so the integrator choice does not affect the
+  DA results.}
   \label{fig:l96-integrator}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.7\linewidth]{L96_Integrator__cell10__out00.png}
+  \includegraphics[width=0.58\linewidth]{L96_Integrator__cell10__out00.png}
   \caption{Direct Lyapunov-time estimate for Lorenz-96. Two trajectories are launched
   $\epsilon_0 = 10^{-6}$ apart and the $L^2$ separation $\lVert\delta\xstate(t)\rVert_2$
   (orange, log scale) is plotted against model time $t$; the dashed black line is an
   exponential fit over the linear-growth window $t \in [0.5, 5.0]$ MTU and the dotted grey
   line marks the saturation scale. The fit yields growth rate
   $\lambda = 2.263\,\mathrm{MTU}^{-1}$ and Lyapunov time $T_L = 1/\lambda = 0.442$ MTU,
-  after which the separation saturates near the attractor diameter. The measured
-  $T_L = 0.442$ MTU is somewhat shorter than the paper's expected $\sim\!0.6$ MTU, a known
-  consequence of the fixed-step RK4 integrator being slightly too coarse to resolve the
-  fastest unstable directions; it sets the chaotic divergence rate seen in
-  Figure~\ref{fig:l96-integrator}.}
+  after which the separation saturates near the attractor diameter. This is somewhat
+  shorter than the paper's expected $\sim\!0.6$ MTU, a known consequence of the fixed-step
+  RK4 integrator being slightly too coarse to resolve the fastest unstable directions.}
   \label{fig:l96-lyapunov}
 \end{figure}
 
@@ -80,9 +75,9 @@ the same $32{,}000$-trajectory dataset with identical Adam settings ($500$ epoch
 size $256$, learning rate $10^{-3}$). The original PyTorch port (GELU
 activations; flat width-$32$ residual stack; bilinear upsampling) reaches a
 final training MSE of $0.3714$, while the paper-faithful inverter
-(SiLU activations \citep{elfwing2018sigmoid}; channel pyramid
-$128\!\to\!64\!\to\!32\!\to\!16$; BN after every convolution
-\citep{ioffe2015batch}; cubic-periodic upsampling; no skip connections) reaches $0.4924$
+(SiLU activations; channel pyramid
+$128\!\to\!64\!\to\!32\!\to\!16$; BN after every convolution;
+cubic-periodic upsampling; no skip connections) reaches $0.4924$
 (Figure~\ref{fig:l96-invtrain}). On a held-out $100$-trajectory set (seed $100$), the
 port attains test $L_1 = 0.3838$ with $\xstate_0$ RMSE $0.9973 \pm 0.3261$, and the
 paper-faithful inverter attains test $L_1 = 0.4470$ with $\xstate_0$ RMSE
@@ -93,21 +88,20 @@ paper-faithful inverter at higher noise gives final MSE $0.6321$, $1.3338$, and 
 at $\sigobs = 0.1, 0.5, 1.0$ respectively; these noise-matched checkpoints supply the
 inverter used in the hybrid DA runs below.
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.7\linewidth]{L96_PaperFaithful__cell10__out00.png}
+  \includegraphics[width=0.58\linewidth]{L96_PaperFaithful__cell10__out00.png}
   \caption{Training-loss curves for the two inverse observation operators at
   $\sigobs = 0$. Both networks are trained on the same $32{,}000$-trajectory dataset with
-  identical Adam settings ($500$ epochs); the vertical axis is training MSE (log scale)
-  and the horizontal axis is epoch. The original PyTorch port (blue; GELU activations,
-  flat width-$32$ residual stack, bilinear upsampling) converges to final MSE $0.3714$,
-  while the paper-faithful inverter (orange; SiLU activations,
+  identical Adam settings ($500$ epochs); vertical axis: training MSE (log scale);
+  horizontal axis: epoch. The blue curve is the original PyTorch port (GELU activations,
+  flat width-$32$ residual stack, bilinear upsampling), converging to final MSE $0.3714$;
+  the orange curve is the paper-faithful inverter (SiLU activations,
   $128\!\to\!64\!\to\!32\!\to\!16$ channels, BN after every convolution, cubic-periodic
-  upsampling, no skip connections) converges to $0.4924$. The two curves track closely
-  throughout, the port settling slightly lower. Despite substantial architectural
-  differences, the paper-faithful inverter reproduces the port's reconstruction quality:
-  on a held-out $100$-trajectory set their test $L_1$ losses are $0.3838$ versus $0.4470$
-  (ratio $1.165$, within the $30\%$ acceptance band).}
+  upsampling, no skip connections), converging to $0.4924$. The two curves track closely,
+  and despite the architectural differences the paper-faithful inverter reproduces the
+  port's reconstruction quality (held-out test $L_1$ ratio $1.165$, within the $30\%$
+  acceptance band).}
   \label{fig:l96-invtrain}
 \end{figure}
 
@@ -133,28 +127,25 @@ artifacts and a distorted wave pattern out of the assimilation window, whereas t
 climatological-mean baseline reproduces the truth's traveling-wave structure far more
 faithfully into the forecast.
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.92\linewidth]{L96_PaperFaithful__cell19__out00.png}
+  \includegraphics[width=0.82\linewidth]{L96_PaperFaithful__cell19__out00.png}
   \caption{Analysis RMSE comparison of the two baseline initializations under untuned full
   4D-Var ($\sigb = 1.0$ fixed). Grouped bars show post-assimilation state RMSE on
   $\xstate_0$ ($\pm$ one standard deviation over $N = 100$ trajectories) for the four
   combinations of initializer (repeat-interleave vs.\ climatological-mean) and
   optimization mode (observation-space vs.\ hybrid), across noise levels
   $\sigobs \in \{0.1, 0.5, 1.0\}$. The repeat-interleave baseline with observation-only
-  optimization (grey) is worst at every noise level; replacing it with the
-  climatological-mean baseline and, especially, adding hybrid optimization lowers RMSE
-  substantially (the climatological+hybrid bars are lowest, most clearly at
-  $\sigobs = 0.1$). A better cold-start prior and hybrid optimization each reduce analysis
-  error even before the background weight $\sigb$ is tuned, motivating the per-cell
-  $\sigb$ sweep that follows. (Direct $\xstate_0$ RMSE of the raw initializers at
-  $\sigobs = 0$ is $4.78$ for repeat vs.\ $3.09$ for climatological mean, ratio $0.646$.)}
+  optimization (grey) is worst at every noise level; the climatological-mean baseline with
+  hybrid optimization is lowest (most clearly at $\sigobs = 0.1$). A better cold-start
+  prior and hybrid optimization each reduce analysis error even before $\sigb$ is tuned,
+  motivating the per-cell $\sigb$ sweep that follows.}
   \label{fig:l96-baselinebar}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.95\linewidth]{L96_PaperFaithful__cell20__out00.png}
+  \includegraphics[width=0.85\linewidth]{L96_PaperFaithful__cell20__out00.png}
   \caption{Hovm\"oller comparison of the two baselines at $\sigobs = 0.5$. Each panel
   shows the Lorenz-96 state $x_k$ (color, red--blue diverging scale) with grid index $k$
   on the vertical axis and time step on the horizontal axis: ground-truth trajectory
@@ -178,7 +169,7 @@ the lowest-RMSE choice ($N = 16$, $T = 10$). Table~\ref{tab:l96-tuned} reports t
 analysis RMSE per cell with the selected $\sigb$ in parentheses, and
 Figure~\ref{fig:l96-keyresult} plots the same data with the optimal $\sigb$ annotated.
 
-\begin{table}[t]
+\begin{table}[H]
   \centering
   \caption{Best analysis RMSE on $\xstate_0$ for tuned-$\sigb$ full 4D-Var on Lorenz-96
   ($N = 16$, $T = 10$), with the selected $\sigb \in \{0.1, 0.3, 1.0, 3.0, 10.0\}$ in
@@ -216,9 +207,9 @@ secondary caveat: tuning $\sigb$ helped only marginally over the untuned $\sigb 
 most cells (gains typically below $0.2$ RMSE, and exactly zero where the best $\sigb$ was
 already $1.0$), and the small ensemble ($N = 16$) makes the error bars wide.
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.97\linewidth]{L96_PaperFaithful__cell28__out00.png}
+  \includegraphics[width=0.88\linewidth]{L96_PaperFaithful__cell28__out00.png}
   \caption{KEY RESULT---tuned-$\sigb$ full 4D-Var on Lorenz-96. One panel per
   observation-noise level ($\sigobs = 0.1, 0.5, 1.0$, left to right); within each panel the
   four bars are the (initializer $\times$ optimization-mode) combinations paper$+$obs,
@@ -229,10 +220,9 @@ already $1.0$), and the small ensemble ($N = 16$) makes the error bars wide.
   the lowest RMSE at every noise level ($0.620$, $1.168$, $1.676$), and hybrid optimization
   dramatically improves the climatological-mean baseline over observation-only (paper$+$obs
   $2.393 \to$ paper$+$hybrid $1.223$ at $\sigobs = 0.5$). The annotated optimal $\sigb$
-  values reveal an honest negative result: the expected ordering ``invobs$+$hybrid prefers
-  a smaller $\sigb$ than paper$+$obs'' does not hold (invobs$+$hybrid selects
-  $\sigb = 10.0/1.0/1.0$ versus paper$+$obs $0.1/0.3/0.3$), and tuning $\sigb$ helps only
-  marginally over the untuned $\sigb = 1$ in most cells.}
+  values also show the honest negative result discussed in the text: invobs$+$hybrid
+  selects $\sigb = 10.0/1.0/1.0$ versus paper$+$obs $0.1/0.3/0.3$, the opposite of the
+  expected ordering.}
   \label{fig:l96-keyresult}
 \end{figure}
 
@@ -245,7 +235,7 @@ after the last window, and an ensemble of $N = 50$ trajectories at noise levels
 $\sigobs \in \{0.0, 0.5\}$. Single-window (cold-start) runs use background variance
 $\sigb = 1.0$, while cycling runs use a tighter $\sigb = 0.3$ because the cycled
 background---the previous analysis propagated forward to the new window start---is
-trusted more than a cold start. Optimization is L-BFGS \citep{liu1989limited} in
+trusted more than a cold start. Optimization is L-BFGS in
 decorrelated coordinates $\bm{z} = \bm{C}^{-1/2}\xstate$ ($\bm{C}$ condition number
 $8.72$); hybrid mode runs $100$ physics-space iterations then $400$ observation-space
 iterations. The roles of ``L-BFGS starting point'' and ``$\Jb$ background'' are
@@ -268,9 +258,9 @@ $\sigobs = 0.5$; these selections feed the references in the experiments below. 
 $\sigobs = 0$ margin among the three good methods is within ensemble scatter, so that
 ``best'' label is a narrow tie-break.
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.95\linewidth]{L96_SlidingWindow__cell27__out00.png}
+  \includegraphics[width=0.85\linewidth]{L96_SlidingWindow__cell27__out00.png}
   \caption{Experiment A: single $8$-step assimilation window on Lorenz-96 ($N = 50$,
   $\sigb = 1.0$), comparing four initialization $\times$ optimization combinations.
   \textbf{Top row:} ensemble-mean spatial $\rmse$ versus time step for $\sigobs = 0.0$
@@ -279,13 +269,11 @@ $\sigobs = 0$ margin among the three good methods is within ensemble scatter, so
   standard deviation. All curves fall to low error inside the window and then grow toward
   the climatological saturation ($\rmse \approx 5$) over the $50$-step forecast, except
   baseline$+$obs-only, which never leaves the climatological level. \textbf{Bottom:}
-  grouped bar chart of analysis $\rmse$ at the window start ($t = 0$). The three
-  optimization-capable methods reach analysis $\rmse \approx 1$ at $\sigobs = 0$ and
-  $\approx 1.6$--$1.9$ at $\sigobs = 0.5$, while baseline$+$obs-only stays near $5$.
-  Physics-space (hybrid) warm-starting is essential to rescue the climatological-mean
-  baseline from a poor observation-space local minimum; the best single-window choice is
-  baseline$+$hybrid at $\sigobs = 0$ and invobs$+$hybrid at $\sigobs = 0.5$, though their
-  margin at $\sigobs = 0$ is within ensemble scatter.}
+  grouped bar chart of analysis $\rmse$ at the window start ($t = 0$): the three
+  optimization-capable methods reach $\approx 1$ at $\sigobs = 0$ and $\approx 1.6$--$1.9$
+  at $\sigobs = 0.5$, while baseline$+$obs-only stays near $5$. Hybrid warm-starting is
+  essential to rescue the climatological-mean baseline from a poor observation-space local
+  minimum.}
   \label{fig:l96-swA}
 \end{figure}
 
@@ -303,9 +291,9 @@ among overlapping curves rather than strong preferences. The dashed single-windo
 reference sits on top of the cycling curves over most of the forecast, foreshadowing that
 cycling's advantage is modest and concentrated near the analysis time.
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.92\linewidth]{L96_SlidingWindow__cell30__out00.png}
+  \includegraphics[width=0.82\linewidth]{L96_SlidingWindow__cell30__out00.png}
   \caption{Experiment B1: sliding-window (cycling) 4D-Var stride sweep on Lorenz-96
   ($N = 50$, invobs init each cycle, hybrid optimization, propagated-analysis background,
   cycling $\sigb = 0.3$). Each panel plots last-cycle ensemble-mean spatial $\rmse$ versus
@@ -318,8 +306,7 @@ cycling's advantage is modest and concentrated near the analysis time.
   coincides with the cycling runs. The three stride curves are nearly indistinguishable
   within ensemble scatter and all relax to climatological saturation; by mean forecast
   $\rmse$ the selected best strides are $8, 2, 8, 8$. Assimilation stride has little effect
-  on Lorenz-96 cycling skill---differences are confined to the window and shortest lead
-  times---so the best stride is a narrow tie-break rather than a strong preference.}
+  on Lorenz-96 cycling skill, so the best stride is a narrow tie-break.}
   \label{fig:l96-swB1}
 \end{figure}
 
@@ -337,9 +324,9 @@ bump for $T_\mathrm{obs} = 48$): with perfect observations a single $8$-step win
 over-determines the $10$ observed components, so extra cycles add little and $N = 50$
 sampling noise dominates.
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.9\linewidth]{L96_SlidingWindow__cell31__out00.png}
+  \includegraphics[width=0.8\linewidth]{L96_SlidingWindow__cell31__out00.png}
   \caption{Experiment B2: per-cycle error reduction for the best-stride sliding-window run
   in each $(T_\mathrm{obs}, \sigobs)$ configuration ($N = 50$). Each panel plots
   ensemble-mean spatial $\rmse$ at the window-start time versus cycle index for the $\Jb$
@@ -351,9 +338,9 @@ sampling noise dominates.
   background within each cycle, and after cycle $0$ the cycled analysis drops below the
   single-window reference. The descent is cleanest at $\sigobs = 0.5$; at $\sigobs = 0$ the
   curves are noisier and non-monotone because a single $8$-step window already
-  over-determines the $10$ observed components and few cycles leave $N = 50$ sampling noise
-  dominant. Cycling demonstrably reduces background error into a better analysis each
-  cycle, with the accumulated-history benefit largest when observations are noisy.}
+  over-determines the $10$ observed components, leaving $N = 50$ sampling noise dominant.
+  Cycling reduces background error into a better analysis each cycle, most clearly when
+  observations are noisy.}
   \label{fig:l96-swB2}
 \end{figure}
 
@@ -376,9 +363,9 @@ long-range predictability. This directly answers the experiment's question---cyc
 more history beats a single long/last window mainly when observations are noisy and history
 is long.
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.97\linewidth]{L96_SlidingWindow__cell34__out00.png}
+  \includegraphics[width=0.88\linewidth]{L96_SlidingWindow__cell34__out00.png}
   \caption{Experiment C (key comparison): sliding-window cycling versus single-window
   4D-Var on Lorenz-96 ($N = 50$). Each $(T_\mathrm{obs}, \sigobs)$ panel (rows
   $T_\mathrm{obs} = 24, 48$; columns $\sigobs = 0.0, 0.5$) plots ensemble-mean spatial
@@ -391,11 +378,9 @@ is long.
   baseline$+$obs-only stays near the climatological $\rmse$ throughout the window; SW-best's
   chain descends as history accumulates, so it enters the last-window analysis time from a
   lower error than the cold single-window methods. The cycling advantage is most pronounced
-  at $\sigobs = 0.5$ with long history $T_\mathrm{obs} = 48$, and marginal (curves overlap
-  within $N = 50$ scatter) at $\sigobs = 0$, where one well-posed $8$-step window already
-  pins the observed state. Deep in the chaotic forecast all methods converge to the same
-  climatological saturation: cycling improves the analysis and short-lead forecast, not the
-  Lyapunov-time-limited long-range predictability.}
+  at $\sigobs = 0.5$ with long history $T_\mathrm{obs} = 48$, and marginal at $\sigobs = 0$.
+  Deep in the chaotic forecast all methods converge to the same climatological saturation:
+  cycling improves the analysis and short-lead forecast, not the long-range predictability.}
   \label{fig:l96-swC}
 \end{figure}
 
@@ -411,9 +396,9 @@ invobs$+$hybrid at $\sigobs = 0.5$, illustrating the same noise-dependent cyclin
 seen in Experiment C, while error growth far into the forecast is comparable across
 methods. This is a single illustrative member, not a statistical summary.
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.97\linewidth]{L96_SlidingWindow__cell36__out00.png}
+  \includegraphics[width=0.88\linewidth]{L96_SlidingWindow__cell36__out00.png}
   \caption{Experiment E: space-time (Hovm\"oller) diagnostics for one ensemble member
   (sample $0$) of the Lorenz-96 sliding-window run. Columns are the four configurations
   $(T_\mathrm{obs}, \sigobs) \in \{24, 48\} \times \{0.0, 0.5\}$; the five rows are
@@ -426,10 +411,9 @@ methods. This is a single illustrative member, not a statistical summary.
   making the two methods directly comparable. The dashed vertical line marks the window end
   $T_\mathrm{obs}$: left of it is the last assimilation window, right of it the $50$-step
   forecast. Both methods reproduce the truth's travelling wave packets through and just past
-  the window; the signed-error rows are near-white inside and immediately after the window
-  and develop structured stripes as the chaotic forecast decorrelates, with SW-best showing
-  visibly cleaner near-window error than the cold single-window invobs$+$hybrid at
-  $\sigobs = 0.5$. Forecast error growth far from the window is comparable across methods;
-  this is a single illustrative member ($N = 50$ overall), not a statistical summary.}
+  the window; the signed-error rows are near-white inside the window and develop structured
+  stripes as the chaotic forecast decorrelates, with SW-best visibly cleaner near the window
+  at $\sigobs = 0.5$. This is a single illustrative member ($N = 50$ overall), not a
+  statistical summary.}
   \label{fig:l96-swE}
 \end{figure}

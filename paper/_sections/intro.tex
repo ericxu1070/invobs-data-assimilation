@@ -6,10 +6,9 @@ atmosphere is observed only incompletely, indirectly, and noisily, producing tha
 initial estimate is itself an inverse problem: given a forecast model and a stream of
 imperfect measurements distributed in space and time, recover the system state well
 enough to forecast from it. This is the task of data assimilation (DA), and it is the
-component of an operational NWP system that most directly limits forecast skill
-\citep{kalnay2003atmospheric}. The flagship variational method is
-four-dimensional variational data assimilation (4D-Var)
-\citep{ledimet1986variational, courtier1994strategy}, which estimates the initial
+component of an operational NWP system that most directly limits forecast skill.
+The flagship variational method is
+four-dimensional variational data assimilation (4D-Var), which estimates the initial
 condition $\xstate_0$ of an assimilation window by minimizing a cost that balances a
 prior (``background'') estimate against the misfit between the model trajectory and the
 observations spread across that window.
@@ -17,7 +16,7 @@ observations spread across that window.
 DA is hard precisely because the systems of interest are chaotic: small errors in the
 analysis (the assimilated initial state) grow exponentially, so the analysis must be
 accurate and the optimization landscape is treacherous. The Lorenz-96 model
-\citep{lorenz1996predictability} is the canonical low-order testbed for exactly this
+is the canonical low-order testbed for exactly this
 difficulty, and it is the primary one-dimensional (1D) system we study here. In our
 configuration (grid size 40, forcing $F=8$), trajectories started $10^{-6}$ apart
 separate at a fitted exponential rate $\lambda = 2.263\,/\mathrm{MTU}$, corresponding to
@@ -56,17 +55,12 @@ JAX/Flax.
 This capstone tests whether the learned inverse-observation idea survives a more
 operationally realistic setting, through four changes. (i)~\emph{Full 4D-Var cost.}
 We replace the paper's observation-misfit-only objective with the complete 4D-Var cost
-$J(\xstate_0) = \Jb + \Jo$,
-\[
-  J(\xstate_0) = \tfrac12 (\xstate_0-\xstate_b)^\top \Bcov^{-1} (\xstate_0-\xstate_b)
-  + \tfrac12 \sum_{t} \big(\Hop \Mop^t(\xstate_0) - \yobs_t\big)^\top \Rcov^{-1}
-    \big(\Hop \Mop^t(\xstate_0)-\yobs_t\big),
-\]
-with background covariance $\Bcov = \sigb^2 \bm{C}$ ($\bm{C}$ the system's spatial
-correlation) and observation-error covariance $\Rcov = \sigobs^2 \bm{I}$. The background
-term pulls the analysis toward a prior $\xstate_b$ and is what makes the problem
-well-posed when observations are sparse; $\sigb$ is the background-error standard
-deviation we tune and $\sigobs$ the observation-error standard deviation.
+$J(\xstate_0) = \Jb + \Jo$ (Eq.~\eqref{eq:4dvar}), adding a background term with
+covariance $\Bcov = \sigb^2 \bm{C}$ ($\bm{C}$ the system's spatial correlation) and an
+observation-error covariance $\Rcov = \sigobs^2 \bm{I}$. The background term pulls the
+analysis toward a prior $\xstate_b$ and is what makes the problem well-posed when
+observations are sparse; $\sigb$ is the background-error standard deviation we tune and
+$\sigobs$ the observation-error standard deviation.
 (ii)~\emph{Observation noise.} Every experiment adds independent Gaussian observation
 noise with $\sigobs \in \{0.1, 0.5, 1.0\}$ (the paper used clean observations), which
 both stress-tests robustness and probes a deliberate mismatch, since the inverter is
@@ -75,11 +69,10 @@ We add an operational sliding-window (cycling) 4D-Var extension in which short
 assimilation windows are advanced through time and each cycle's analysis is propagated
 forward to form the background for the next window---the way 4D-Var is actually run
 operationally, in contrast to the paper's single fixed window.
-(iv)~\emph{PyTorch reimplementation.} We rebuild the entire pipeline in PyTorch
-\citep{paszke2019pytorch}---the dynamical-system integrators, the CNN inverter, the
-correlation preconditioning, and the data-assimilation loop solved with the
-limited-memory Broyden--Fletcher--Goldfarb--Shanno (L-BFGS) optimizer
-\citep{liu1989limited}.
+(iv)~\emph{PyTorch reimplementation.} We rebuild the entire pipeline in PyTorch---the
+dynamical-system integrators, the CNN inverter, the correlation preconditioning, and the
+data-assimilation loop solved with the limited-memory
+Broyden--Fletcher--Goldfarb--Shanno (L-BFGS) optimizer.
 
 Our headline finding is that the paper's central claim broadly holds under these harder
 conditions: learned-inverse-observation initialization combined with hybrid optimization

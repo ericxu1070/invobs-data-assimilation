@@ -1,63 +1,13 @@
-\begin{thebibliography}{11}
+\begin{thebibliography}{1}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Kalnay(2003)]{kalnay2003atmospheric}
-Eugenia Kalnay.
-\newblock \emph{Atmospheric Modeling, Data Assimilation and Predictability}.
-\newblock Cambridge University Press, Cambridge, 2003.
-
-\bibitem[Le~Dimet and Talagrand(1986)]{ledimet1986variational}
-Fran{\c{c}}ois-Xavier Le~Dimet and Olivier Talagrand.
-\newblock Variational algorithms for analysis and assimilation of meteorological observations: theoretical aspects.
-\newblock \emph{Tellus A}, 38\penalty0 (2):\penalty0 97--110, 1986.
-
-\bibitem[Courtier et~al.(1994)Courtier, Th{\'e}paut, and Hollingsworth]{courtier1994strategy}
-Philippe Courtier, Jean-No{\"e}l Th{\'e}paut, and Anthony Hollingsworth.
-\newblock A strategy for operational implementation of {4D-Var}, using an incremental approach.
-\newblock \emph{Quarterly Journal of the Royal Meteorological Society}, 120\penalty0 (519):\penalty0 1367--1387, 1994.
-
-\bibitem[Lorenz(1996)]{lorenz1996predictability}
-Edward~N. Lorenz.
-\newblock Predictability: A problem partly solved.
-\newblock In \emph{Proceedings of the ECMWF Seminar on Predictability}, volume~1, pages 1--18. ECMWF, Reading, UK, 1996.
-
 \bibitem[Frerix et~al.(2021)Frerix, Kochkov, Smith, Cremers, Brenner, and Hoyer]{frerix2021invobs}
 Thomas Frerix, Dmitrii Kochkov, Jamie~A. Smith, Daniel Cremers, Michael~P. Brenner, and Stephan Hoyer.
 \newblock Variational data assimilation with a learned inverse observation operator, 2021.
 \newblock Proceedings of the 38th International Conference on Machine Learning (ICML).
-
-\bibitem[Paszke et~al.(2019)Paszke, Gross, Massa, Lerer, Bradbury, Chanan, Killeen, Lin, Gimelshein, Antiga, et~al.]{paszke2019pytorch}
-Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, et~al.
-\newblock {PyTorch}: An imperative style, high-performance deep learning library.
-\newblock In \emph{Advances in Neural Information Processing Systems (NeurIPS)}, volume~32, 2019.
-
-\bibitem[Liu and Nocedal(1989)]{liu1989limited}
-Dong~C. Liu and Jorge Nocedal.
-\newblock On the limited memory {BFGS} method for large scale optimization.
-\newblock \emph{Mathematical Programming}, 45\penalty0 (1--3):\penalty0 503--528, 1989.
-
-\bibitem[Kochkov et~al.(2021)Kochkov, Smith, Alieva, Wang, Brenner, and Hoyer]{kochkov2021machine}
-Dmitrii Kochkov, Jamie~A. Smith, Ayya Alieva, Qing Wang, Michael~P. Brenner, and Stephan Hoyer.
-\newblock Machine learning--accelerated computational fluid dynamics.
-\newblock \emph{Proceedings of the National Academy of Sciences}, 118\penalty0 (21):\penalty0 e2101784118, 2021.
-
-\bibitem[Dormand and Prince(1980)]{dormand1980family}
-John~R. Dormand and Peter~J. Prince.
-\newblock A family of embedded {Runge--Kutta} formulae.
-\newblock \emph{Journal of Computational and Applied Mathematics}, 6\penalty0 (1):\penalty0 19--26, 1980.
-
-\bibitem[Elfwing et~al.(2018)Elfwing, Uchibe, and Doya]{elfwing2018sigmoid}
-Stefan Elfwing, Eiji Uchibe, and Kenji Doya.
-\newblock Sigmoid-weighted linear units for neural network function approximation in reinforcement learning.
-\newblock \emph{Neural Networks}, 107:\penalty0 3--11, 2018.
-
-\bibitem[Ioffe and Szegedy(2015)]{ioffe2015batch}
-Sergey Ioffe and Christian Szegedy.
-\newblock Batch normalization: Accelerating deep network training by reducing internal covariate shift.
-\newblock In \emph{Proceedings of the 32nd International Conference on Machine Learning (ICML)}, pages 448--456, 2015.
 
 \end{thebibliography}
