@@ -24,6 +24,8 @@
 \newcommand{\sigb}{\sigma_{\mathrm{b}}}
 \newcommand{\sigobs}{\sigma_{\mathrm{obs}}}
 \newcommand{\rmse}{\mathrm{RMSE}}
+\newcommand{\dtout}{\Delta t_{\mathrm{out}}}  % outer integration step
+\newcommand{\dtin}{\Delta t_{\mathrm{in}}}    % inner integration substep
 
 \title{\textbf{Full Four-Dimensional Variational Data Assimilation with a\\
 Learned Inverse Observation Operator under Observation Noise}}
@@ -54,8 +56,9 @@ systems: the one-dimensional (1D) Lorenz-96 model and two-dimensional (2D) Kolmo
 incompressible Navier--Stokes system. Across all noise levels, learned-inverse initialization
 combined with hybrid (physics-space then observation-space) optimization yields the lowest analysis
 root-mean-square error (RMSE), and sliding-window cycling stabilizes assimilation over horizons
-where single-window 4D-Var degrades. We also report honest negative results, including a background
-weight that tuned only marginally and an unexpected optimal-variance ordering.
+where single-window 4D-Var degrades. We also report honest negative results, including a
+background-error standard deviation whose tuning yielded only marginal gains and an
+unexpected ordering of its optimal value.
 \end{abstract}
 
 \input{_sections/intro.tex}

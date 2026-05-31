@@ -21,8 +21,8 @@ evolving under the ordinary differential equation (ODE)
 \end{equation}
 with forcing $F=8$ and cyclic indices. We integrate
 Eq.~\eqref{eq:l96} with a hand-written fixed-step fourth-order Runge--Kutta
-(RK4) scheme in which each outer step $\Delta t = 0.1$ MTU is
-composed of ten inner RK4 substeps of size $0.01$. The observation operator
+(RK4) scheme in which each outer step $\dtout = 0.1$ MTU is
+composed of ten inner RK4 substeps of size $\dtin = 0.01$. The observation operator
 $\Hop$ subsamples every fourth grid point, so the $40$-dimensional state is
 observed at only $10$ sites.
 
@@ -53,7 +53,7 @@ step $0.18$ composed of $25$ inner substeps. Here $\Hop$ subsamples every
 sixteenth point in each direction, giving a $4\times 4$ observation grid
 ($16$ of $4096$ points observed). Warmed-up initial conditions are produced by
 integrating a spectrally filtered random field forward $100$ outer steps; a
-warmup diagnostic confirms the flow reaches a statistically stationary
+warmup diagnostic confirms the flow reaches an approximately quasi-stationary
 turbulent regime, with the enstrophy $\tfrac12\langle\omega^2\rangle$ rising
 from $0.50$ at the smooth cold start to $\approx 9.8$ near the warmup horizon
 (last-$20$-step relative drift $\approx 10.8\%$, i.e.\ approximately
@@ -167,7 +167,8 @@ J_{\text{phys}}(\xstate_0)
 \label{eq:physcost}
 \end{equation}
 where $\Hinv(Y)$ lifts the observation sequence into physics space, removing the
-many-to-one operator $\Hop$ from inside the objective. The \emph{hybrid}
+many-to-one operator $\Hop$ from inside the objective, and $\sigma_p$ is the
+physics-space error scale (set to $\sigma_p = 0.1$ in our runs). The \emph{hybrid}
 schedule runs physics-space optimization first as a warm start
 (Eq.~\eqref{eq:physcost}) and then refines against the true observations with the
 observation-space cost $\Jb+\Jo$ (Eq.~\eqref{eq:4dvar}); we contrast it
@@ -183,8 +184,9 @@ $N$-sample ensemble is optimized in a single batched L-BFGS call: because each
 row's gradient depends only on its own observations, the batched problem is
 exactly equivalent to $N$ independent 4D-Var problems. The hybrid schedule
 allocates a fixed number of physics-space iterations followed by
-observation-space iterations (for Lorenz-96 cycling, $100$ then $400$), whereas
-pure observation-space runs spend the full iteration budget on $\Jb+\Jo$.
+observation-space iterations (for the single-window Lorenz-96 runs, $200$ then
+$300$; for Lorenz-96 cycling, $100$ then $400$), whereas pure observation-space
+runs spend the full iteration budget on $\Jb+\Jo$.
 
 \subsection{Sliding-window (cycling) 4D-Var}
 
@@ -201,5 +203,5 @@ cycle re-initializes the L-BFGS starting point from a fresh $\Hinv$ estimate of
 the current window, and the noise-matched inverter checkpoint is used at each
 cycle. The stride is chosen so that the most recent window is always assimilated
 even when $(T_{\text{obs}}-\texttt{WINDOW\_T})$ is not divisible by it. Because
-cycling trusts the propagated analysis, it uses a tighter background variance
-($\sigb=0.3$) than the cold-start single window ($\sigb=1.0$).
+cycling trusts the propagated analysis, it uses a tighter background-error
+standard deviation ($\sigb=0.3$) than the cold-start single window ($\sigb=1.0$).

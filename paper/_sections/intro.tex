@@ -53,7 +53,11 @@ JAX/Flax.
 
 \paragraph{Our contribution.}
 This capstone tests whether the learned inverse-observation idea survives a more
-operationally realistic setting, through four changes. (i)~\emph{Full 4D-Var cost.}
+operationally realistic setting, through three extensions, all built on a from-scratch
+PyTorch reimplementation of the entire pipeline (the original is JAX/Flax)---the
+dynamical-system integrators, the CNN inverter, the correlation preconditioning, and the
+data-assimilation loop solved with the limited-memory
+Broyden--Fletcher--Goldfarb--Shanno (L-BFGS) optimizer. (i)~\emph{Full 4D-Var cost.}
 We replace the paper's observation-misfit-only objective with the complete 4D-Var cost
 $J(\xstate_0) = \Jb + \Jo$ (Eq.~\eqref{eq:4dvar}), adding a background term with
 covariance $\Bcov = \sigb^2 \bm{C}$ ($\bm{C}$ the system's spatial correlation) and an
@@ -69,10 +73,6 @@ We add an operational sliding-window (cycling) 4D-Var extension in which short
 assimilation windows are advanced through time and each cycle's analysis is propagated
 forward to form the background for the next window---the way 4D-Var is actually run
 operationally, in contrast to the paper's single fixed window.
-(iv)~\emph{PyTorch reimplementation.} We rebuild the entire pipeline in PyTorch---the
-dynamical-system integrators, the CNN inverter, the correlation preconditioning, and the
-data-assimilation loop solved with the limited-memory
-Broyden--Fletcher--Goldfarb--Shanno (L-BFGS) optimizer.
 
 Our headline finding is that the paper's central claim broadly holds under these harder
 conditions: learned-inverse-observation initialization combined with hybrid optimization

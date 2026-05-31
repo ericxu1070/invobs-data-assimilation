@@ -82,9 +82,11 @@ adaptive Dormand--Prince (dopri5) integrator represent the same physics
 does not contaminate the data assimilation (DA) results.
 
 \emph{The negative $\sigb$-ordering result.} We expected
-invobs$+$hybrid to prefer a \emph{smaller} optimal background weight $\sigb$
-than the paper baseline, since the learned lift should make the analysis trust
-the data more. This did not hold: invobs$+$hybrid selected
+invobs$+$hybrid to prefer a \emph{smaller} optimal background-error standard
+deviation $\sigb$ than the paper baseline---reasoning that the learned lift
+supplies a stronger physics-space prior, so the analysis could lean on the
+background more (a smaller $\sigb$ raises the background weight
+$1/(2\sigb^2)$). This did not hold: invobs$+$hybrid selected
 $\sigb = 10.0/1.0/1.0$ while paper$+$obs selected $\sigb = 0.1/0.3/0.3$, the
 opposite direction at all three noise levels. Moreover, tuning $\sigb$ helped
 only marginally over the untuned $\sigb = 1$ in most cells (gains typically
@@ -133,7 +135,7 @@ would otherwise trap pure observation-space optimization. The operational
 sliding-window extension showed that cycling can further reduce analysis error
 as history accumulates, most clearly when observations are noisy. At the same
 time we report honest negatives---an unmet expectation about the optimal
-background weight, a short integrator-limited Lyapunov time, and
+background-error standard deviation, a short integrator-limited Lyapunov time, and
 compute-limited 2D runs---that mark exactly where larger ensembles, GPU-scale
 Kolmogorov experiments, richer covariances, and an adaptive integrator would
 turn these encouraging tendencies into firm conclusions.

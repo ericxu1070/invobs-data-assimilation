@@ -11,14 +11,14 @@ sweep; and finally the sliding-window (cycling) experiments.
 
 Our PyTorch port integrates Lorenz-96 (grid size $40$,
 forcing $F=8$) with a fixed-step RK4 scheme, ten inner
-substeps of $\Delta t = 0.01$ per outer step $dt = 0.1$, whereas the reference paper
+substeps of $\dtin = 0.01$ per outer step $\dtout = 0.1$, whereas the reference paper
 uses an adaptive dopri5 solver. To check
 that this choice does not contaminate the DA results, we propagate
 the same warmed-up attractor state $200$ outer steps ($20$ MTU) with
 both integrators and measure the $L^2$ state divergence
 $\lVert \xstate_{\mathrm{RK4}}(t) - \xstate_{\mathrm{adapt}}(t)\rVert_2$
-(Figure~\ref{fig:l96-integrator}). Because the per-step RK4 truncation error is
-$O(\Delta t^4) = O(10^{-8})$, well below the adaptive tolerances, the two integrators
+(Figure~\ref{fig:l96-integrator}). Because the global RK4 truncation error is
+$O(\dtin^4) = O(10^{-8})$, well below the adaptive tolerances, the two integrators
 agree to near machine precision while $t \ll T_L$ and only diverge once the tiny
 per-step difference is amplified at the chaotic rate. The divergence first reaches the
 order-one (state-norm) scale at $t^\ast = 6.30$ MTU for a single trajectory; across five
@@ -161,8 +161,8 @@ faithfully into the forecast.
 
 \subsubsection{Tuned-\texorpdfstring{$\sigb$}{sigma\_b} full 4D-Var: the key result}
 
-Our central single-window experiment sweeps the background weight
-$\sigb \in \{0.1, 0.3, 1.0, 3.0, 10.0\}$ for every (initializer $\times$
+Our central single-window experiment sweeps the background-error standard deviation
+$\sigb$ over $\{0.1, 0.3, 1.0, 3.0, 10.0\}$ for every (initializer $\times$
 optimization-mode $\times$ noise) cell of the full 4D-Var cost
 $J = \Jb + \Jo$, with $\Bcov = \sigb^2 \bm{C}$ and $\Rcov = \sigobs^2 \bm{I}$, and records
 the lowest-RMSE choice ($N = 16$, $T = 10$). Table~\ref{tab:l96-tuned} reports the best
@@ -194,7 +194,8 @@ Three findings stand out. First, the positive headline: invobs initialization co
 with hybrid (physics-space then observation-space) optimization attains the lowest
 analysis RMSE at every noise level ($0.620$, $1.168$, $1.676$ for
 $\sigobs = 0.1, 0.5, 1.0$), confirming that the paper's central idea survives in our full
-4D-Var setting with observation noise. Second, hybrid optimization dramatically beats
+4D-Var setting with observation noise (at $\sigobs = 0.1$ this is effectively a tie with
+paper$+$hybrid, $0.620$ vs $0.621$). Second, hybrid optimization dramatically beats
 observation-only optimization for the climatological-mean baseline that has no learned
 lift: at $\sigobs = 0.5$, paper$+$obs ($2.393$) is roughly halved to paper$+$hybrid
 ($1.223$), because observation-only 4D-Var from a poor prior falls into bad local minima
@@ -232,8 +233,8 @@ We next extend the single fixed window to an operational cycling scheme. All Lor
 sliding-window experiments use grid size $40$, $\Hop$ observing every fourth point,
 per-cycle window $\texttt{WINDOW\_T} = 8$ steps, a $50$-step forecast horizon evaluated
 after the last window, and an ensemble of $N = 50$ trajectories at noise levels
-$\sigobs \in \{0.0, 0.5\}$. Single-window (cold-start) runs use background variance
-$\sigb = 1.0$, while cycling runs use a tighter $\sigb = 0.3$ because the cycled
+$\sigobs \in \{0.0, 0.5\}$. Single-window (cold-start) runs use background-error standard
+deviation $\sigb = 1.0$, while cycling runs use a tighter $\sigb = 0.3$ because the cycled
 background---the previous analysis propagated forward to the new window start---is
 trusted more than a cold start. Optimization is L-BFGS in
 decorrelated coordinates $\bm{z} = \bm{C}^{-1/2}\xstate$ ($\bm{C}$ condition number
@@ -384,7 +385,7 @@ is long.
   \label{fig:l96-swC}
 \end{figure}
 
-\paragraph{Experiment E (Hovm\"oller diagnostics).}
+\paragraph{Experiment D (Hovm\"oller diagnostics).}
 Finally, Figure~\ref{fig:l96-swE} shows space-time (Hovm\"oller) diagnostics for one
 ensemble member across the four $(T_\mathrm{obs}, \sigobs)$ configurations, comparing the
 truth, the SW-best reconstruction and signed error, and the single-window invobs$+$hybrid
@@ -399,7 +400,7 @@ methods. This is a single illustrative member, not a statistical summary.
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.88\linewidth]{L96_SlidingWindow__cell36__out00.png}
-  \caption{Experiment E: space-time (Hovm\"oller) diagnostics for one ensemble member
+  \caption{Experiment D: space-time (Hovm\"oller) diagnostics for one ensemble member
   (sample $0$) of the Lorenz-96 sliding-window run. Columns are the four configurations
   $(T_\mathrm{obs}, \sigobs) \in \{24, 48\} \times \{0.0, 0.5\}$; the five rows are
   (1) truth, (2) SW-best reconstructed state, (3) SW-best signed error (prediction $-$
