@@ -28,3 +28,6 @@ paper/*.fdb_latexmk
 paper/*.out
 paper/*.blg
 paper/_build/*.log
+
+# Regenerable extraction output (see paper/_build/_extract_notebooks.py)
+paper/_build/extracted_unused/
