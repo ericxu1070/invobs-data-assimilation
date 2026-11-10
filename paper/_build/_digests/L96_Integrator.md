@@ -3,7 +3,7 @@
 ## [md cell 0]
 # PyTorch InvObs DA — v2 Integrator Diagnostic (Phase 3)
 
-[INSTRUCTIONS_FROM_REVIEW.md](INSTRUCTIONS_FROM_REVIEW.md) Phase 3.
+Phase 3 of the post-review rebuild.
 
 **The question.** The v1 PyTorch port integrates Lorenz96 with **fixed RK4**
 (`dt=0.01`, 10 inner steps per outer step). The paper uses

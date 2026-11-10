@@ -3,7 +3,7 @@
 ## [md cell 0]
 # PyTorch InvObs DA — v2 Paper-Faithful
 
-Phase 1 of the post-review rebuild ([INSTRUCTIONS_FROM_REVIEW.md](INSTRUCTIONS_FROM_REVIEW.md)).
+Phase 1 of the post-review rebuild.
 
 **What this notebook does**
 1. Loads shared helpers from `pytorch_invobs_lib.py` (lifted verbatim from the
@@ -115,7 +115,7 @@ inverter variant later only retrains the network — not the data.
 
 ## [code cell 5]
 ```python
-# Training-set parameters from INSTRUCTIONS_FROM_REVIEW.md (Phase 1).
+# Training-set parameters (Phase 1).
 N_TRAIN     = 32000
 T_TRAIN     = 20
 N_WARMUP    = 1000
