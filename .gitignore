@@ -19,3 +19,12 @@ tmp/
 
 # Editor and agent settings
 .claude/settings.local.json
+
+# LaTeX build output (paper/main.pdf and main.bbl stay tracked)
+paper/*.aux
+paper/*.log
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.out
+paper/*.blg
+paper/_build/*.log
