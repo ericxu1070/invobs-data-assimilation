@@ -17,12 +17,11 @@ Unit tests for methods in run_data_assimilation.py using pytest.
 
 This test depends on the pinned legacy JAX stack (jax==0.2.6, flax==0.3.0,
 jax_cfd==0.1.0) and is skipped automatically when those modules are absent --
-see CLAUDE.md for the reason the stack is not installed by default.
+see docs/jax-pipeline.md for why the stack is not installed by default.
 
 Note: the original file imported ``from data_assimilation import ...`` but the
-module on disk is ``run_data_assimilation.py``; that mismatch was flagged in
-INSTRUCTIONS_FROM_REVIEW.md (Phase-cross-cutting task). The import below uses
-the actual module name. Fix is import-only -- module was NOT renamed.
+module on disk is ``run_data_assimilation.py``. The import below uses the
+actual module name. Fix is import-only -- module was NOT renamed.
 """
 import pytest
 import json

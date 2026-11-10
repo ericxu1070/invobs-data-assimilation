@@ -16,7 +16,7 @@ From this `paper/` directory:
 latexmk -pdf main.tex
 ```
 
-(Uses `pdflatex` + `bibtex`; produces `main.pdf`, 29 pages.) The local build used TinyTeX.
+(Uses `pdflatex` + `bibtex`; produces `main.pdf`, 25 pages.) The local build used TinyTeX.
 The preamble drops the `caption`/`subcaption` packages so it builds on a minimal TeX Live
 install; no other non-standard packages are required.
 
@@ -27,17 +27,12 @@ install; no other non-standard packages are required.
   `results_kflow`, `discussion`.
 - `figures/` — the 18 figures used in the report (pulled from the project notebooks).
 - `references.bib` — bibliography.
-- `_build/` — reproducibility helpers, not needed to compile:
-  - `_extract_notebooks.py` — regenerates figures + text digests from the `.ipynb` notebooks.
-  - `_digests/` — plain-text digests of each source notebook (figures referenced inline).
-  - `_manifest.json` — every figure extracted from the notebooks, with source cell + context.
-  - `extracted_unused/` — the 50 extracted figures not used in the report.
-  - `_author_guide.md`, `_preamble.tex` — the conventions/preamble used while authoring.
+- `_build/_extract_notebooks.py` - regenerates figures, text digests, and a manifest from the `.ipynb` notebooks. It writes every embedded figure, including ones the report does not use, to `_build/figures/`, `_build/_digests/`, and `_build/_manifest.json`. These outputs are not tracked. The compile does not use this script.
 
 ## Source notebooks for the figures
 
-- `PyTorch_InvObs_DA_v2_PaperFaithful.ipynb` — inverter training, baseline init, tuned-σ_b 4D-Var.
-- `PyTorch_InvObs_DA_v2_Integrator.ipynb` — RK4-vs-adaptive divergence, Lyapunov time.
-- `PyTorch_InvObs_DA_v2_Kolmogorov.ipynb` — Kolmogorov training trajectory.
-- `SlidingWindow_PyTorch.ipynb` — Lorenz-96 cycling experiments A/B/C/E.
-- `SlidingWindow_Kolmogorov_PyTorch.ipynb` — Kolmogorov cycling experiments.
+- `notebooks/PyTorch_InvObs_DA_v2_PaperFaithful.ipynb` — inverter training, baseline init, tuned-σ_b 4D-Var.
+- `notebooks/PyTorch_InvObs_DA_v2_Integrator.ipynb` — RK4-vs-adaptive divergence, Lyapunov time.
+- `notebooks/PyTorch_InvObs_DA_v2_Kolmogorov.ipynb` — Kolmogorov training trajectory.
+- `notebooks/SlidingWindow_PyTorch_final.ipynb` — Lorenz-96 cycling experiments A/B/C/E.
+- `notebooks/SlidingWindow_Kolmogorov_PyTorch.ipynb` — Kolmogorov cycling experiments.

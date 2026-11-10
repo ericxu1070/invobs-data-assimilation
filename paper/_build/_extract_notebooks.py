@@ -14,7 +14,7 @@ import os
 import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = os.path.dirname(os.path.dirname(HERE))
 FIG_DIR = os.path.join(HERE, "figures")
 DIG_DIR = os.path.join(HERE, "_digests")
 os.makedirs(FIG_DIR, exist_ok=True)
@@ -25,7 +25,7 @@ NOTEBOOKS = {
     "PyTorch_InvObs_DA_v2_PaperFaithful.ipynb": "L96_PaperFaithful",
     "PyTorch_InvObs_DA_v2_Integrator.ipynb": "L96_Integrator",
     "PyTorch_InvObs_DA_v2_Kolmogorov.ipynb": "KFlow_Full4DVar",
-    "SlidingWindow_PyTorch.ipynb": "L96_SlidingWindow",
+    "SlidingWindow_PyTorch_final.ipynb": "L96_SlidingWindow",
     "SlidingWindow_Kolmogorov_PyTorch.ipynb": "KFlow_SlidingWindow",
     "PyTorch_InvObs_DA_WindowSweep_Corrected.ipynb": "L96_WindowSweep",
     "PyTorch_InvObs_DA.ipynb": "L96_Original_Port",
@@ -57,7 +57,7 @@ def output_text(out):
 def main():
     manifest = []
     for nb_name, slug in NOTEBOOKS.items():
-        path = os.path.join(ROOT, nb_name)
+        path = os.path.join(ROOT, "notebooks", nb_name)
         if not os.path.exists(path):
             print("MISSING:", nb_name)
             continue

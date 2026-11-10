@@ -12,7 +12,25 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Generated outputs at root
-noise_distributions.png
+/noise_distributions.png
 
 # Temp
 tmp/
+
+# Editor and agent settings
+.claude/settings.local.json
+
+# LaTeX build output (paper/main.pdf and main.bbl stay tracked)
+paper/*.aux
+paper/*.log
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.out
+paper/*.blg
+paper/_build/*.log
+
+# Regenerable extraction output (see paper/_build/_extract_notebooks.py)
+paper/_build/extracted_unused/
+paper/_build/figures/
+paper/_build/_digests/
+paper/_build/_manifest.json
