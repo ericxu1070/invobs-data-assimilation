@@ -27,11 +27,7 @@ install; no other non-standard packages are required.
   `results_kflow`, `discussion`.
 - `figures/` — the 18 figures used in the report (pulled from the project notebooks).
 - `references.bib` — bibliography.
-- `_build/` — reproducibility helpers, not needed to compile:
-  - `_extract_notebooks.py` — regenerates figures + text digests from the `.ipynb` notebooks. It writes every embedded figure, including ones the report does not use.
-  - `_digests/` — plain-text digests of each source notebook (figures referenced inline).
-  - `_manifest.json` — every figure extracted from the notebooks, with source cell + context.
-  - `_author_guide.md`, `_preamble.tex` — the conventions/preamble used while authoring.
+- `_build/_extract_notebooks.py` - regenerates figures, text digests, and a manifest from the `.ipynb` notebooks. It writes every embedded figure, including ones the report does not use, to `_build/figures/`, `_build/_digests/`, and `_build/_manifest.json`. These outputs are not tracked. The compile does not use this script.
 
 ## Source notebooks for the figures
 

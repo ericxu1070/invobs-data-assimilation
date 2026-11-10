@@ -31,3 +31,6 @@ paper/_build/*.log
 
 # Regenerable extraction output (see paper/_build/_extract_notebooks.py)
 paper/_build/extracted_unused/
+paper/_build/figures/
+paper/_build/_digests/
+paper/_build/_manifest.json

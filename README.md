@@ -19,7 +19,6 @@ The repository also contains an assimilation-window sweep with gradient diagnost
 | Path | Contents |
 |---|---|
 | `PyTorch_InvObs_DA.ipynb` | The first PyTorch port: Lorenz-96, the inverse-observation CNN, 4D-Var with a noise sweep, and Kolmogorov flow. |
-| `PyTorch_InvObs_DA_Javs_updated.ipynb` | A variant of `PyTorch_InvObs_DA.ipynb` with the same sections and edits to the Kolmogorov flow code. |
 | `PyTorch_InvObs_DA_WindowSweep_Corrected.ipynb` | Assimilation-window sweep on Lorenz-96 with gradient diagnostics. It loads a cached CNN checkpoint. |
 | `PyTorch_InvObs_DA_v2_PaperFaithful.ipynb` | Trains a CNN that follows the paper's architecture, compares baseline initializations, and sweeps the background error `sigma_b`. |
 | `PyTorch_InvObs_DA_v2_Integrator.ipynb` | Fixed-step RK4 versus adaptive dopri5, and a Lyapunov-time estimate. |
@@ -41,8 +40,8 @@ The notebooks hold their executed outputs, so you can read the results without r
 To run them, install PyTorch and the packages that the notebooks import: `numpy`, `matplotlib`, `pandas`, and `torchdiffeq`. `plot_noise_distributions.py` also needs `scipy`, and the tests need `pytest`. The `v2` notebooks install any missing package themselves through `notebook_setup.py`. Do not install `requirements.txt` for the PyTorch code. It pins the legacy JAX stack of `paper_scripts/` and adds `torchdiffeq`.
 
 1. Clone the repository and start Jupyter from its root. The notebooks import modules from the repository root.
-2. Open `PyTorch_InvObs_DA.ipynb` first. Its header says that the defaults run in a few minutes on a Colab GPU. Other notebooks use longer training, for example 500 epochs in `PyTorch_InvObs_DA_Javs_updated.ipynb`.
-3. Set the cache directory. The `v2` notebooks read the environment variable `INVOBS_CACHE_DIR` and fall back to `~/invobs_cache`. `PyTorch_InvObs_DA.ipynb`, `PyTorch_InvObs_DA_Javs_updated.ipynb`, and `SlidingWindow_PyTorch_final.ipynb` hard-code `CACHE_DIR = '/content/drive/MyDrive/invobs_cache'`, a Google Drive path, so edit that line to run them locally. The repository stores no trained weights, so the first run trains the networks.
+2. Open `PyTorch_InvObs_DA.ipynb` first. Its header says that the defaults run in a few minutes on a Colab GPU. Other notebooks use longer training, for example 500 epochs in `PyTorch_InvObs_DA_v2_PaperFaithful.ipynb`.
+3. Set the cache directory. The `v2` notebooks read the environment variable `INVOBS_CACHE_DIR` and fall back to `~/invobs_cache`. `PyTorch_InvObs_DA.ipynb` and `SlidingWindow_PyTorch_final.ipynb` hard-code `CACHE_DIR = '/content/drive/MyDrive/invobs_cache'`, a Google Drive path, so edit that line to run them locally. The repository stores no trained weights, so the first run trains the networks.
 4. `PyTorch_InvObs_DA_WindowSweep_Corrected.ipynb` raises an error unless the cache directory already holds `l96_inverter_sigma0.0_n32000_ep500.pt`. The repository does not say which run produces that file, so train it first or use a cache that has it.
 
 To run the tests from the repository root:
