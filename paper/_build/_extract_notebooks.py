@@ -25,7 +25,7 @@ NOTEBOOKS = {
     "PyTorch_InvObs_DA_v2_PaperFaithful.ipynb": "L96_PaperFaithful",
     "PyTorch_InvObs_DA_v2_Integrator.ipynb": "L96_Integrator",
     "PyTorch_InvObs_DA_v2_Kolmogorov.ipynb": "KFlow_Full4DVar",
-    "SlidingWindow_PyTorch.ipynb": "L96_SlidingWindow",
+    "SlidingWindow_PyTorch_final.ipynb": "L96_SlidingWindow",
     "SlidingWindow_Kolmogorov_PyTorch.ipynb": "KFlow_SlidingWindow",
     "PyTorch_InvObs_DA_WindowSweep_Corrected.ipynb": "L96_WindowSweep",
     "PyTorch_InvObs_DA.ipynb": "L96_Original_Port",
