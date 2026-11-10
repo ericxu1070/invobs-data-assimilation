@@ -12,19 +12,19 @@ The report in [`paper/main.pdf`](paper/main.pdf) describes three extensions of t
 - **Observation noise.** Every experiment adds Gaussian noise to the observations. The Lorenz-96 experiments use noise standard deviations of 0.1, 0.5, and 1.0 in the single-window sweep and 0.0 and 0.5 in the cycling experiments.
 - **Sliding-window (cycling) 4D-Var.** The solver runs over successive windows, and the propagated previous analysis serves as the background for the next window.
 
-The repository also contains an assimilation-window sweep with gradient diagnostics (`PyTorch_InvObs_DA_WindowSweep_Corrected.ipynb`) and a comparison of a fixed-step RK4 integrator with an adaptive one.
+The repository also contains an assimilation-window sweep with gradient diagnostics (`notebooks/PyTorch_InvObs_DA_WindowSweep_Corrected.ipynb`) and a comparison of a fixed-step RK4 integrator with an adaptive one.
 
 ## Repository layout
 
 | Path | Contents |
 |---|---|
-| `PyTorch_InvObs_DA.ipynb` | The first PyTorch port: Lorenz-96, the inverse-observation CNN, 4D-Var with a noise sweep, and Kolmogorov flow. |
-| `PyTorch_InvObs_DA_WindowSweep_Corrected.ipynb` | Assimilation-window sweep on Lorenz-96 with gradient diagnostics. It loads a cached CNN checkpoint. |
-| `PyTorch_InvObs_DA_v2_PaperFaithful.ipynb` | Trains a CNN that follows the paper's architecture, compares baseline initializations, and sweeps the background error `sigma_b`. |
-| `PyTorch_InvObs_DA_v2_Integrator.ipynb` | Fixed-step RK4 versus adaptive dopri5, and a Lyapunov-time estimate. |
-| `PyTorch_InvObs_DA_v2_Kolmogorov.ipynb` | Kolmogorov flow: data, inverse-observation CNN training, and evaluation. |
-| `SlidingWindow_PyTorch_final.ipynb` | Sliding-window 4D-Var on Lorenz-96. |
-| `SlidingWindow_Kolmogorov_PyTorch.ipynb` | Sliding-window 4D-Var on Kolmogorov flow. |
+| `notebooks/PyTorch_InvObs_DA.ipynb` | The first PyTorch port: Lorenz-96, the inverse-observation CNN, 4D-Var with a noise sweep, and Kolmogorov flow. |
+| `notebooks/PyTorch_InvObs_DA_WindowSweep_Corrected.ipynb` | Assimilation-window sweep on Lorenz-96 with gradient diagnostics. It loads a cached CNN checkpoint. |
+| `notebooks/PyTorch_InvObs_DA_v2_PaperFaithful.ipynb` | Trains a CNN that follows the paper's architecture, compares baseline initializations, and sweeps the background error `sigma_b`. |
+| `notebooks/PyTorch_InvObs_DA_v2_Integrator.ipynb` | Fixed-step RK4 versus adaptive dopri5, and a Lyapunov-time estimate. |
+| `notebooks/PyTorch_InvObs_DA_v2_Kolmogorov.ipynb` | Kolmogorov flow: data, inverse-observation CNN training, and evaluation. |
+| `notebooks/SlidingWindow_PyTorch_final.ipynb` | Sliding-window 4D-Var on Lorenz-96. |
+| `notebooks/SlidingWindow_Kolmogorov_PyTorch.ipynb` | Sliding-window 4D-Var on Kolmogorov flow. |
 | `pytorch_invobs_lib.py`, `pytorch_paper_inverter.py`, `pytorch_kolmogorov.py` | Shared PyTorch code imported by the `v2` and Kolmogorov notebooks. |
 | `notebook_setup.py` | Environment detection, package installation, cache directory, and device selection for the `v2` notebooks. |
 | `plot_noise_distributions.py` | Draws the noise-distribution figure used in the report. |
@@ -39,10 +39,10 @@ The notebooks hold their executed outputs, so you can read the results without r
 
 To run them, install PyTorch and the packages that the notebooks import: `numpy`, `matplotlib`, `pandas`, and `torchdiffeq`. `plot_noise_distributions.py` also needs `scipy`, and the tests need `pytest`. The `v2` notebooks install any missing package themselves through `notebook_setup.py`. Do not install `requirements.txt` for the PyTorch code. It pins the legacy JAX stack of `paper_scripts/` and adds `torchdiffeq`.
 
-1. Clone the repository and start Jupyter from its root. The notebooks import modules from the repository root.
-2. Open `PyTorch_InvObs_DA.ipynb` first. Its header says that the defaults run in a few minutes on a Colab GPU. Other notebooks use longer training, for example 500 epochs in `PyTorch_InvObs_DA_v2_PaperFaithful.ipynb`.
-3. Set the cache directory. The `v2` notebooks read the environment variable `INVOBS_CACHE_DIR` and fall back to `~/invobs_cache`. `PyTorch_InvObs_DA.ipynb` and `SlidingWindow_PyTorch_final.ipynb` hard-code `CACHE_DIR = '/content/drive/MyDrive/invobs_cache'`, a Google Drive path, so edit that line to run them locally. The repository stores no trained weights, so the first run trains the networks.
-4. `PyTorch_InvObs_DA_WindowSweep_Corrected.ipynb` raises an error unless the cache directory already holds `l96_inverter_sigma0.0_n32000_ep500.pt`. The repository does not say which run produces that file, so train it first or use a cache that has it.
+1. Clone the repository and start Jupyter from its root or from `notebooks/`. The notebooks that import root modules or save figures begin with a cell that changes to the repository root, so the imports and `figures/` resolve there.
+2. Open `notebooks/PyTorch_InvObs_DA.ipynb` first. Its header says that the defaults run in a few minutes on a Colab GPU. Other notebooks use longer training, for example 500 epochs in `notebooks/PyTorch_InvObs_DA_v2_PaperFaithful.ipynb`.
+3. Set the cache directory. The `v2` notebooks read the environment variable `INVOBS_CACHE_DIR` and fall back to `~/invobs_cache`. `notebooks/PyTorch_InvObs_DA.ipynb` and `notebooks/SlidingWindow_PyTorch_final.ipynb` hard-code `CACHE_DIR = '/content/drive/MyDrive/invobs_cache'`, a Google Drive path, so edit that line to run them locally. The repository stores no trained weights, so the first run trains the networks.
+4. `notebooks/PyTorch_InvObs_DA_WindowSweep_Corrected.ipynb` raises an error unless the cache directory already holds `l96_inverter_sigma0.0_n32000_ep500.pt`. The repository does not say which run produces that file, so train it first or use a cache that has it.
 
 To run the tests from the repository root:
 

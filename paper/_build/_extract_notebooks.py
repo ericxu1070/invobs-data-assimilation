@@ -14,7 +14,7 @@ import os
 import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = os.path.dirname(os.path.dirname(HERE))
 FIG_DIR = os.path.join(HERE, "figures")
 DIG_DIR = os.path.join(HERE, "_digests")
 os.makedirs(FIG_DIR, exist_ok=True)
@@ -57,7 +57,7 @@ def output_text(out):
 def main():
     manifest = []
     for nb_name, slug in NOTEBOOKS.items():
-        path = os.path.join(ROOT, nb_name)
+        path = os.path.join(ROOT, "notebooks", nb_name)
         if not os.path.exists(path):
             print("MISSING:", nb_name)
             continue
