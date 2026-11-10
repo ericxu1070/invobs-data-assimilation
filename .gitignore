@@ -16,3 +16,6 @@ noise_distributions.png
 
 # Temp
 tmp/
+
+# Editor and agent settings
+.claude/settings.local.json
